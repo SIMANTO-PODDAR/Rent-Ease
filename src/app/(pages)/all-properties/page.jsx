@@ -1,3 +1,4 @@
+import Pagination from '@/components/Pagination';
 import PropertyCard from '@/components/PropertyCard';
 import PropertyFilter from '@/components/PropertyFilter';
 import React from 'react';
@@ -8,18 +9,24 @@ const page = async ({ searchParams }) => {
     const search = resolvedParams?.search || '';
     const propertyType = resolvedParams?.propertyType || '';
     const sort = resolvedParams?.sort || '';
+    const pageParam = parseInt(resolvedParams?.page) || 1;
+    const limitParam = parseInt(resolvedParams?.limit) || 9;
 
     //  querys
     const queryParams = new URLSearchParams();
     if (search) queryParams.set('search', search);
     if (propertyType && propertyType !== 'All Types') queryParams.set('propertyType', propertyType);
     if (sort) queryParams.set('sort', sort);
+    queryParams.set('page', pageParam.toString());
+    queryParams.set('limit', limitParam.toString());
 
     const res = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/all-properties?${queryParams.toString()}`,
         { cache: "no-store" }
     );
-    const fProperties = await res.json();
+    const data = await res.json();
+    const fProperties = data.properties || [];
+    const pagination = data.pagination || { currentPage: 1, totalPages: 1, totalItems: 0, limit: 9 };
 
     return (
         <div className="min-h-screen py-10 px-4 sm:px-6 lg:px-8 bg-gray-50/30">
@@ -41,11 +48,14 @@ const page = async ({ searchParams }) => {
                 />
 
                 {fProperties && fProperties.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center mt-6">
-                        {fProperties.map((property, ind) => (
-                            <PropertyCard key={property._id || ind} property={property} />
-                        ))}
-                    </div>
+                    <>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center mt-6">
+                            {fProperties.map((property, ind) => (
+                                <PropertyCard key={property._id || ind} property={property} />
+                            ))}
+                        </div>
+                        <Pagination pagination={pagination} />
+                    </>
                 ) : (
                     <div className="text-center py-16 px-4 bg-white rounded-3xl border border-gray-100 shadow-md max-w-md mx-auto mt-12 flex flex-col items-center">
                         <div className="bg-gray-50 p-4 rounded-full mb-4">
