@@ -2,10 +2,26 @@
 import Image from "next/image";
 import Logo from "../../public/logo.png"
 import Link from "next/link";
+import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
+    const { data } = authClient.useSession();
+    const user = data?.user;
+    const router = useRouter();
 
-    const user = false;
+    const LogOut = async () => {
+        await authClient.signOut({
+            fetchOptions: {
+                onSuccess: () => {
+                    toast.success('Log out successfully!');
+                    window.location.reload();
+                    router.push("/");
+                },
+            },
+        });
+    }
 
     return (
         <div className="sm:sticky top-0 z-50">
@@ -40,7 +56,7 @@ const Navbar = () => {
                                 Dashboard
                             </Link>
 
-                            <button className="btn btn-error font-bold text-white flex gap-2 items-center" >
+                            <button onClick={LogOut} className="btn btn-error font-bold text-white flex gap-2 items-center" >
                                 Logout
                             </button>
                         </div>
