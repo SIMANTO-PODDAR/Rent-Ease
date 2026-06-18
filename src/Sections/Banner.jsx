@@ -5,6 +5,7 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import { Search, MapPin, Home, DollarSign } from "lucide-react";
 import BannerImg from "../../public/BannerImg.jpg"
+import { useRouter } from "next/navigation";
 
 const propertyTypes = [
     "All Types",
@@ -17,13 +18,14 @@ const propertyTypes = [
 
 const Banner = () => {
     const [location, setLocation] = useState("");
-    const [propertyType, setPropertyType] = useState("All Types");
+    const [propertyType, setPropertyType] = useState("");
     const [minPrice, setMinPrice] = useState("");
     const [maxPrice, setMaxPrice] = useState("");
+    const router = useRouter();
 
     const handleSearch = (e) => {
         e.preventDefault();
-        console.log({ location, propertyType, minPrice, maxPrice });
+        router.push(`/all-properties?search=${location}&propertyType=${propertyType}`);
     };
 
     return (

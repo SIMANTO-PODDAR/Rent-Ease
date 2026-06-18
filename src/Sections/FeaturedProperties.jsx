@@ -9,9 +9,11 @@ const FeaturedProperties = async () => {
     return (
         <div>
             <div className="text-center mt-5 mb-12">
-                <h2 className="text-4xl text-[#0D0D33] md:text-5xl font-bold my-10">
-                    Featured Properties
-                </h2>
+                <div>
+                    <h2 className="text-4xl text-[#0a3d62] md:text-5xl font-bold mb-4 mt-5 text-center">
+                        Featured Properties
+                    </h2>
+                </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 my-5 justify-center gap-10">
                     {
                         fProperties.map((property, ind) =>
