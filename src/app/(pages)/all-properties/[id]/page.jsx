@@ -67,7 +67,7 @@ const PropertyDetailsPage = async ({ params }) => {
                 </div>
 
                 {/* 1. Large Property Image */}
-                <div className="relative overflow-hidden rounded-3xl shadow-xl h-64 sm:h-[400px] md:h-[480px] mb-8 bg-gray-200">
+                <div className="relative overflow-hidden rounded-3xl shadow-xl h-64 sm:h-100 md:h-120 mb-8 bg-gray-200">
                     <img
                         src={property.image || '/placeholder-property.jpg'}
                         alt={property.title}
@@ -215,7 +215,7 @@ const PropertyDetailsPage = async ({ params }) => {
                 </div>
 
                 {/* 7. Reviews Section */}
-                <PropertyReviews />
+                <PropertyReviews propertyId={id} />
 
             </div>
         </div>

@@ -1,67 +1,57 @@
-import { Star } from 'lucide-react';
+import { Calendar, Mail, Star } from 'lucide-react';
 import React from 'react';
 
-const PropertyReviews = () => {
+const PropertyReviews = async ({ propertyId }) => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-reviews/${propertyId}`);
+    const reviews = await res.json();
 
-    // Static reviews data
-    const fakeReviews = [
-        {
-            id: 1,
-            reviewerName: "Emily Watson",
-            rating: 5,
-            date: "June 14, 2026",
-            comment: "Absolutely loved staying here! The property is exactly as described, very clean, and in a fantastic location. The owner was extremely helpful."
-        },
-        {
-            id: 2,
-            reviewerName: "Michael Chen",
-            rating: 4,
-            date: "May 28, 2026",
-            comment: "Great apartment with excellent amenities. The high-speed internet was perfect for my remote work. Minor noise from the street, but overall a solid experience."
-        },
-        {
-            id: 3,
-            reviewerName: "Sophia Rodriguez",
-            rating: 5,
-            date: "April 15, 2026",
-            comment: "Wonderful experience! The space is very spacious, and the extra features like the balcony and generator backup made a huge difference. Highly recommend!"
-        },
-        {
-            id: 4,
-            reviewerName: "David Kim",
-            rating: 4,
-            date: "March 20, 2026",
-            comment: "Very convenient location. Close to local shops and schools. Clean layout and responsive owner. I would definitely rent this again."
-        }
-    ];
     return (
         <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-gray-100">
             <h3 className="text-lg sm:text-xl font-bold text-[#0a3d62] mb-6 flex items-center gap-2">
                 Guest Reviews
-                <span className="text-sm font-normal text-gray-400">({fakeReviews.length})</span>
+                <span className="text-sm font-normal text-gray-400">({reviews.length})</span>
             </h3>
 
             <div className="space-y-6">
-                {fakeReviews.map((review) => (
-                    <div key={review.id} className="border-b border-gray-100 last:border-0 pb-6 last:pb-0">
-                        <div className="flex justify-between items-start mb-2.5">
+                {reviews.map((review) => (
+                    <div key={review._id} className="bg-white rounded-lg border border-gray-100 p-4 mb-4 last:mb-0 shadow-sm hover:shadow-md transition-shadow">
+
+                        <div className="flex flex-wrap justify-between items-start gap-2">
                             <div>
-                                <h4 className="font-bold text-gray-800 text-sm sm:text-base">{review.reviewerName}</h4>
-                                <span className="text-xs text-gray-400">{review.date}</span>
+                                <h4 className="font-semibold text-gray-800 text-base">
+                                    {review.tenantInfo.name}
+                                </h4>
+                                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-500 mt-1">
+                                    <span className="flex items-center gap-1">
+                                        <span className='scale-70'><Mail/></span> {review.tenantInfo.email || 'N/A'}
+                                    </span>
+                                    <span className="flex items-center gap-1">
+                                        <span className='scale-70'><Calendar/></span> {review.date}
+                                    </span>
+                                </div>
                             </div>
-                            <div className="flex items-center gap-0.5">
-                                {[...Array(5)].map((_, i) => (
-                                    <Star
-                                        key={i}
-                                        className={`w-4 h-4 ${i < review.rating ? 'text-amber-400 fill-amber-400' : 'text-gray-200'
-                                            }`}
-                                    />
-                                ))}
+
+                            <div className="flex flex-col items-end">
+                                <div className="flex items-center gap-0.5">
+                                    {[...Array(5)].map((_, i) => (
+                                        <Star
+                                            key={i}
+                                            className={`w-4 h-4 ${i < review.rating ? 'text-amber-400 fill-amber-400' : 'text-gray-200'}`}
+                                        />
+                                    ))}
+                                </div>
+                                <span className="text-xs text-gray-400 mt-0.5">
+                                    Rating: {review.rating}/5
+                                </span>
                             </div>
                         </div>
-                        <p className="text-gray-600 text-sm leading-relaxed">
-                            {review.comment}
-                        </p>
+
+                        {/* Comment */}
+                        <div className="mt-2 pt-2 border-t border-gray-50">
+                            <p className="text-gray-700 text-sm leading-relaxed">
+                                {review.comment}
+                            </p>
+                        </div>
                     </div>
                 ))}
             </div>
