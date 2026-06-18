@@ -48,7 +48,7 @@ const PropertyReviews = async ({ propertyId }) => {
 
                         {/* Comment */}
                         <div className="mt-2 pt-2 border-t border-gray-50">
-                            <p className="text-gray-700 text-sm leading-relaxed">
+                            <p className="text-gray-700 text-sm leading-relaxed line-clamp-2">
                                 {review.comment}
                             </p>
                         </div>

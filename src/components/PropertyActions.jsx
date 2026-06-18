@@ -3,12 +3,20 @@
 import React, { useState } from 'react';
 import { Heart, Calendar, Star, MessageSquare, Send } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { authClient } from '@/lib/auth-client';
 
-const PropertyActions = () => {
+const PropertyActions = ({ propertyId }) => {
     const [isFavorite, setIsFavorite] = useState(false);
     const [rating, setRating] = useState(0);
     const [hoverRating, setHoverRating] = useState(0);
     const [reviewText, setReviewText] = useState("");
+
+    const { data: session } = authClient.useSession();
+    const user = session?.user;
+    const userName = user?.name;
+    const userEmail = user?.email;
+    const userId = user?.id;
+    const date = new Date();
 
     const handleFavorite = () => {
         setIsFavorite(!isFavorite);
@@ -44,18 +52,13 @@ const PropertyActions = () => {
         });
     };
 
-    const handleSubmitReview = (e) => {
+    const handleSubmitReview = async (e) => {
         e.preventDefault();
-        if (rating === 0) {
-            toast.error("Please select a rating before submitting.", {
-                style: {
-                    borderRadius: '10px',
-                    background: '#333',
-                    color: '#fff',
-                },
-            });
+        if (!user) {
+            toast.error('Please login and try again.');
             return;
-        }
+        };
+
         if (!reviewText.trim()) {
             toast.error("Please write a review comment.", {
                 style: {
@@ -67,18 +70,41 @@ const PropertyActions = () => {
             return;
         }
 
-        toast.success(`Review submitted! Rating: ${rating} Stars.`, {
-            icon: '✅',
-            style: {
-                borderRadius: '10px',
-                background: '#333',
-                color: '#fff',
+        // API call
+        // console.log(`user: ${userName}, ${userEmail}, ${date},
+        //     Rating: ${rating}, Comment: ${reviewText},
+        //     ${userId}${propertyId}  `)
+
+        const Data = {
+            propertyId: propertyId,
+            tenantInfo: {
+                name: userName,
+                id: userId,
+                email: userEmail,
             },
+            rating: rating,
+            comment: reviewText,
+            date: date,
+        };
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-reviews`, {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(Data),
         });
 
-        // Reset fields
-        setRating(0);
-        setReviewText("");
+        if (res.ok == true) {
+            toast.success('Rating successful.');
+
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
+        }
+        else {
+            toast.error('Something went wrong! Try again.');
+        };
     };
 
     return (
