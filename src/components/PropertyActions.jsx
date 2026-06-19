@@ -17,6 +17,7 @@ const PropertyActions = ({ propertyId }) => {
     const userEmail = user?.email;
     const userId = user?.id;
     const date = new Date();
+    const role = user?.role;
 
     const handleFavorite = () => {
         setIsFavorite(!isFavorite);
@@ -85,6 +86,7 @@ const PropertyActions = ({ propertyId }) => {
             rating: rating,
             comment: reviewText,
             date: date,
+            role: role,
         };
 
         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-reviews`, {

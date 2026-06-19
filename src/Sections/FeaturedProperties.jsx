@@ -9,7 +9,7 @@ const FeaturedProperties = async () => {
     return (
         <div>
             <div className="text-center mt-5 mb-12">
-                <div>
+                <div className='my-10'>
                     <h2 className="text-4xl text-[#0a3d62] md:text-5xl font-bold mb-4 mt-5 text-center">
                         Featured Properties
                     </h2>
