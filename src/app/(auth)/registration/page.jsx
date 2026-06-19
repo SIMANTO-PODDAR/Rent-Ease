@@ -139,7 +139,7 @@ const RegistrationPage = () => {
     };
 
     return (
-        <div>
+        <div className="mb-10">
             <div>
                 <h2 className="text-4xl text-[#0a3d62] md:text-5xl font-bold mb-4 mt-5 text-center">
                     Create Your Rent-Ease Account

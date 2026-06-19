@@ -83,7 +83,7 @@ const cardVariants = {
 
 export default function TopLocations() {
     return (
-        <section className="w-full py-16 bg-slate-50 md:py-24">
+        <section className="w-full py-16 bg-slate-50 md:py-24 rounded-2xl mb-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="mb-10">
                     <h2 className="text-4xl text-[#0a3d62] md:text-5xl font-bold mb-4 mt-5 text-center">

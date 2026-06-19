@@ -1,4 +1,5 @@
 import Banner from "@/Sections/Banner";
+import ContactSection from "@/Sections/ContactSection";
 import CustomerReviews from "@/Sections/CustomerReviews";
 import FeaturedProperties from "@/Sections/FeaturedProperties";
 import TopLocations from "@/Sections/TopLocations";
@@ -12,6 +13,7 @@ export default function Home() {
       <WhyChooseUs />
       <CustomerReviews />
       <TopLocations />
+      <ContactSection />
 
     </div>
   );
