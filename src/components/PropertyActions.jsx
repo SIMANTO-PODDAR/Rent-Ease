@@ -1,11 +1,12 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Heart, Calendar, Star, MessageSquare, Send } from 'lucide-react';
+import { Heart, Star, MessageSquare, Send } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { authClient } from '@/lib/auth-client';
+import BookProperty from './Booking/BookProperty';
 
-const PropertyActions = ({ propertyId, propertyName }) => {
+const PropertyActions = ({ propertyId, propertyName, ownerName, ownerEmail, ownerId }) => {
     const [isFavorite, setIsFavorite] = useState(false);
     const [rating, setRating] = useState(0);
     const [hoverRating, setHoverRating] = useState(0);
@@ -43,17 +44,6 @@ const PropertyActions = ({ propertyId, propertyName }) => {
 
         setIsFavorite(true);
         toast.success("Added to Favorites!")
-    };
-
-    const handleBook = () => {
-        toast.info("Booking functionality is coming soon!", {
-            icon: '📅',
-            style: {
-                borderRadius: '10px',
-                background: '#333',
-                color: '#fff',
-            },
-        });
     };
 
     const handleSubmitReview = async (e) => {
@@ -115,14 +105,16 @@ const PropertyActions = ({ propertyId, propertyName }) => {
     return (
         <div className="space-y-6">
             {/* Primary booking and favoriting buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
-                <button
-                    onClick={handleBook}
-                    className="flex-1 bg-linear-to-r from-[#0a3d62] to-[#3498db] text-white py-3.5 px-6 rounded-xl font-bold hover:opacity-90 active:scale-98 transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
-                >
-                    <Calendar className="w-5 h-5" />
-                    Book Property
-                </button>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                <BookProperty
+                    ownerId={ownerId}
+                    ownerEmail={ownerEmail}
+                    ownerName={ownerName}
+                    propertyId={propertyId}
+                    propertyName={propertyName}
+                />
+
                 <button
                     onClick={handleFavorite}
                     className={`flex-1 py-3.5 px-6 rounded-xl font-bold border-2 transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-98 ${isFavorite
