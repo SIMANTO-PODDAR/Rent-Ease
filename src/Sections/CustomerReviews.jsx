@@ -11,13 +11,13 @@ const CustomerReviews = async () => {
 
     return (
         <div>
-            <div className='my-5'>
+            <div className='my-15'>
                 <h2 className="text-4xl text-[#0a3d62] md:text-5xl font-bold mb-4 mt-5 text-center">
                     Customer Reviews
                 </h2>
 
                 {/* react - fast - marquee loops these 4 good reviews continuously to create the marquee effect. */}
-                <div>
+                <div className='mt-10'>
                     <Marquee
                         pauseOnHover='true'
                         autoFill='true'
