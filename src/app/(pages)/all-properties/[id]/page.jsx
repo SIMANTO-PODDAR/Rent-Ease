@@ -211,7 +211,7 @@ const PropertyDetailsPage = async ({ params }) => {
                 <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-gray-100 mb-8">
                     <h3 className="text-lg sm:text-xl font-bold text-[#0a3d62] mb-2">Actions</h3>
                     <p className="text-xs text-gray-400 mb-4">Select an option below for Booking and favorites.</p>
-                    <PropertyActions propertyId={id} />
+                    <PropertyActions propertyId={id} propertyName={property.title} />
                 </div>
 
                 {/* 7. Reviews Section */}

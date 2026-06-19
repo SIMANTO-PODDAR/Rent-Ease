@@ -5,7 +5,7 @@ import { Heart, Calendar, Star, MessageSquare, Send } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { authClient } from '@/lib/auth-client';
 
-const PropertyActions = ({ propertyId }) => {
+const PropertyActions = ({ propertyId, propertyName }) => {
     const [isFavorite, setIsFavorite] = useState(false);
     const [rating, setRating] = useState(0);
     const [hoverRating, setHoverRating] = useState(0);
@@ -19,27 +19,30 @@ const PropertyActions = ({ propertyId }) => {
     const date = new Date();
     const role = user?.role;
 
-    const handleFavorite = () => {
-        setIsFavorite(!isFavorite);
-        if (!isFavorite) {
-            toast.success("Added to Favorites!", {
-                icon: '❤️',
-                style: {
-                    borderRadius: '10px',
-                    background: '#333',
-                    color: '#fff',
-                },
-            });
-        } else {
-            toast.success("Removed from Favorites.", {
-                icon: '💔',
-                style: {
-                    borderRadius: '10px',
-                    background: '#333',
-                    color: '#fff',
-                },
-            });
-        }
+    const handleFavorite = async () => {
+
+        if (!user) {
+            toast.error('Please login and try again.');
+            return;
+        };
+
+        const Data = {
+            propertyId: propertyId,
+            propertyName: propertyName,
+            userId: userId,
+            date: date,
+        };
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-favorites`, {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(Data),
+        });
+
+        setIsFavorite(true);
+        toast.success("Added to Favorites!")
     };
 
     const handleBook = () => {

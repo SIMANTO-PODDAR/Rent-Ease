@@ -12,7 +12,7 @@ const GoogleLoginButton = ({ BtnFor }) => {
         });
 
         if (data) {
-            toast.success(`${BtnFor} successfully.`, {
+            toast.success(``, {
                 id: LoadingToast
             });
         };
