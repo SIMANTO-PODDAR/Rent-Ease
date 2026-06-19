@@ -4,7 +4,7 @@ import { Modal, Surface, Label, FieldError, Button, TextArea, TextField, Input }
 import { Calendar } from "lucide-react";
 import toast from "react-hot-toast";
 
-const BookProperty = ({ propertyId, propertyName, ownerName, ownerEmail, ownerId }) => {
+const BookProperty = ({ propertyId, propertyName, ownerName, ownerEmail, ownerId, amountPaid }) => {
 
     const { data: session } = authClient.useSession();
     const user = session?.user;
@@ -25,9 +25,9 @@ const BookProperty = ({ propertyId, propertyName, ownerName, ownerEmail, ownerId
             //  Booking data
             bookingDate: new Date(),
             bookingStatus: 'Pending',  //            Pending (initial),  Approved,  Rejected 
-            transactionId: '',         // <---  ⚠️
-            amountPaid: '',            // <---  ⚠️
-            paymentStatus: 'Paid',     //            Paid, UnPaid
+            transactionId: '',
+            amountPaid: Number(amountPaid),
+            paymentStatus: 'Unpaid',   //            Unpaid (initial), Paid
 
 
             //  Property Info
@@ -65,20 +65,34 @@ const BookProperty = ({ propertyId, propertyName, ownerName, ownerEmail, ownerId
             body: JSON.stringify(Data),
         });
 
-        if (res.ok == true) {
-            toast.success('Booking successful.', {
-                id: LoadingToast
-            });
 
-            setTimeout(() => {
-                window.location.reload();
-            }, 2300);
-        }
-        else {
-            toast.error('Something went wrong! Try again.', {
+        if (!res.ok) {
+            toast.error("Booking failed", {
                 id: LoadingToast
             });
-        };
+            return;
+        }
+
+        const booking = await res.json();
+
+        const formData = new FormData();
+
+        formData.append("bookingId", booking.insertedId);
+        formData.append("price", amountPaid);
+        formData.append("title", propertyName);
+
+        const paymentRes = await fetch("/api/payment", {
+            method: "POST",
+            body: formData,
+        });
+
+        const paymentData = await paymentRes.json();
+
+        window.location.href = paymentData.url;
+
+        toast('', {
+            id: LoadingToast
+        });
     };
 
     return (
@@ -183,7 +197,11 @@ const BookProperty = ({ propertyId, propertyName, ownerName, ownerEmail, ownerId
                                         </div>
 
                                         <Modal.Footer>
-                                            <Button type="submit" className="btn btn-[15px] flex gap-2  items-center justify-start font-bold text-white bg-linear-to-r from-[#0D0D33] to-[#0033FF]">Book Now</Button>
+                                            <p className="text-[11px] font-bold"> <span className="text-error uppercase">Important:</span>
+                                                <br />
+                                                Please do NOT close or refresh the browser until the payment process is completed and you receive a transaction confirmation.
+                                            </p>
+                                            <Button type="submit" className="btn btn-[15px] flex gap-2  items-center justify-start font-bold text-white bg-linear-to-r from-[#0a3d62] to-[#3498db]">Book Now</Button>
                                         </Modal.Footer>
                                     </form>
                                 </Surface>

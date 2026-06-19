@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 import { authClient } from '@/lib/auth-client';
 import BookProperty from './Booking/BookProperty';
 
-const PropertyActions = ({ propertyId, propertyName, ownerName, ownerEmail, ownerId }) => {
+const PropertyActions = ({ propertyId, propertyName, ownerName, ownerEmail, ownerId, amountPaid }) => {
     const [isFavorite, setIsFavorite] = useState(false);
     const [rating, setRating] = useState(0);
     const [hoverRating, setHoverRating] = useState(0);
@@ -108,6 +108,7 @@ const PropertyActions = ({ propertyId, propertyName, ownerName, ownerEmail, owne
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
                 <BookProperty
+                    amountPaid={amountPaid}
                     ownerId={ownerId}
                     ownerEmail={ownerEmail}
                     ownerName={ownerName}

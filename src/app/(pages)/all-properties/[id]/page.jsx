@@ -213,6 +213,7 @@ const PropertyDetailsPage = async ({ params }) => {
                     <p className="text-xs text-gray-400 mb-4">Select an option below for Booking and favorites.</p>
 
                     <PropertyActions
+                        amountPaid={property.rentPrice}
                         ownerId={property.owner.id}
                         ownerEmail={property.owner.email}
                         ownerName={property.owner.name}
