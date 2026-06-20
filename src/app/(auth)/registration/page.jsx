@@ -58,7 +58,7 @@ const RegistrationPage = () => {
                 toast.error("Upload failed", { id: uploadingToast });
             }
         } catch (error) {
-            console.error(error);
+            // console.error(error);
             toast.error("Upload failed");
         } finally {
             setUploading(false);

@@ -5,14 +5,14 @@ import { FcGoogle } from 'react-icons/fc';
 const GoogleLoginButton = ({ BtnFor }) => {
 
     const GoogleLogin = async () => {
-        const LoadingToast = toast.loading('Processing your request..');
+        const LoadingToast = toast.loading('Processing your request...');
 
         const { data, error } = await authClient.signIn.social({
             provider: "google",
         });
 
         if (data) {
-            toast.success(``, {
+            toast(`Verify your credentials`, {
                 id: LoadingToast
             });
         };

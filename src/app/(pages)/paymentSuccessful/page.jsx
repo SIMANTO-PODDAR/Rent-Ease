@@ -6,7 +6,7 @@ const PaymentSuccessfulPage = async ({ searchParams }) => {
 
     const { session_id } = await searchParams;
     if (!session_id) {
-        return redirect('/')
+        return redirect('/unauthorized')
     }
 
     // console.log("Session ID:", session_id);

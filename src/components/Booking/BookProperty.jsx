@@ -20,6 +20,12 @@ const BookProperty = ({ propertyId, propertyName, ownerName, ownerEmail, ownerId
             return;
         };
 
+        if (user?.role != 'Tenant') {
+            toast.error('Please sign in as a tenant to continue.', {
+                id: LoadingToast
+            });
+            return;
+        }
 
         const Data = {
             //  Booking data
@@ -90,7 +96,7 @@ const BookProperty = ({ propertyId, propertyName, ownerName, ownerEmail, ownerId
 
         window.location.href = paymentData.url;
 
-        toast('', {
+        toast('Verify your credentials...', {
             id: LoadingToast
         });
     };

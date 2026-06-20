@@ -8,7 +8,7 @@ import Link from "next/link";
 export default function Error({ error, reset }) {
   useEffect(() => {
     // Silently log to monitoring service if needed
-    console.error(error);
+    // console.error(error);
   }, [error]);
 
   return (
