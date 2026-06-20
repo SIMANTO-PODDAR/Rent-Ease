@@ -2,12 +2,12 @@ import DashboardSidebar from "@/components/DashboardComponents/DashboardSidebar"
 
 export default function DashboardLayout({ children }) {
   return (
-    <div className="flex h-[90vh] bg-background">
+    <div className="flex bg-background">
       <div className="flex flex-1 overflow-hidden">
         <DashboardSidebar />
 
-        <div className="flex-1 overflow-y-auto">
-          <div>
+        <div className="flex-1">
+          <div className="mt-5 md:mt-0">
 
             {children}
 

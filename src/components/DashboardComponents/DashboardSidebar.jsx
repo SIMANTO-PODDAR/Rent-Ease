@@ -23,14 +23,14 @@ export default async function DashboardSidebar() {
       {
         group: "MAIN",
         items: [
-          { icon: CalendarDays, label: "My Bookings", link: "/dashboard/bookings" },
-          { icon: Heart, label: "Favorites", link: "/dashboard/favorites" },
+          { icon: CalendarDays, label: "My Bookings", link: "/dashboard/tenant/bookings" },
+          { icon: Heart, label: "Favorites", link: "/dashboard/tenant/favorites" },
         ]
       },
       {
         group: "ACCOUNT",
         items: [
-          { icon: User, label: "Profile", link: "/dashboard/profile" },
+          { icon: User, label: "Profile", link: "/dashboard/tenant" },
         ]
       }
     ],
@@ -38,16 +38,16 @@ export default async function DashboardSidebar() {
       {
         group: "PROPERTY MANAGEMENT",
         items: [
-          { icon: LayoutDashboard, label: "Home", link: "/dashboard" },
-          { icon: PlusSquare, label: "Add Property", link: "/dashboard/add-property" },
-          { icon: Building2, label: "My Properties", link: "/dashboard/properties" },
-          { icon: ClipboardList, label: "Booking Requests", link: "/dashboard/requests" },
+          { icon: LayoutDashboard, label: "Home", link: "/dashboard/owner" },
+          { icon: PlusSquare, label: "Add Property", link: "/dashboard/owner/add-property" },
+          { icon: Building2, label: "My Properties", link: "/dashboard/owner/owner-properties" },
+          { icon: ClipboardList, label: "Booking Requests", link: "/dashboard/owner/booking-requests" },
         ]
       },
       {
         group: "ACCOUNT",
         items: [
-          { icon: User, label: "Profile", link: "/dashboard/profile" },
+          { icon: User, label: "Profile", link: "/dashboard/owner/profile" },
         ]
       }
     ],
@@ -55,16 +55,16 @@ export default async function DashboardSidebar() {
       {
         group: "MANAGEMENT",
         items: [
-          { icon: Users, label: "All Users", link: "/dashboard/users" },
-          { icon: Building2, label: "All Properties", link: "/dashboard/properties" },
-          { icon: CalendarCheck, label: "All Bookings", link: "/dashboard/bookings" },
-          { icon: CreditCard, label: "Transactions", link: "/dashboard/transactions" },
+          { icon: Users, label: "All Users", link: "/dashboard/admin/all-users" },
+          { icon: Building2, label: "All Properties", link: "/dashboard/admin/all-properties" },
+          { icon: CalendarCheck, label: "All Bookings", link: "/dashboard/admin/all-bookings" },
+          { icon: CreditCard, label: "Transactions", link: "/dashboard/admin/transactions" },
         ]
       },
       {
         group: "ACCOUNT",
         items: [
-          { icon: User, label: "Profile", link: "/dashboard/profile" },
+          { icon: User, label: "Profile", link: "/dashboard/admin" },
         ]
       }
     ],
@@ -132,12 +132,16 @@ export default async function DashboardSidebar() {
   return (
     <Drawer>
       {/* Mobile Trigger Button */}
-      <Button
-        className="flex sm:hidden items-center gap-2 rounded-xl bg-linear-to-r from-[#0a3d62] to-[#3498db] text-white shadow-md font-medium m-4 scale-80"
-      >
-        <Menu className="size-5" />
-        Menu
-      </Button>
+      <div className="relative">
+
+        <Button
+          className="absolute top-1 left-1 z-50 flex sm:hidden items-center gap-2 rounded-xl bg-linear-to-r from-[#0a3d62] to-[#3498db] text-white shadow-md font-medium scale-80"
+        >
+          <Menu className="size-5" />
+          Menu
+        </Button>
+      </div>
+
 
       {/* Desktop Inline Sidebar */}
       <div className="hidden sm:flex flex-col w-70 shrink-0 border-r border-slate-200 bg-white p-4 min-h-screen">

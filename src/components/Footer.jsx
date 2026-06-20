@@ -13,18 +13,18 @@ const Footer = () => {
 
   const quickLinks = [
     { name: 'Browse Properties', href: '/all-properties' },
-    { name: 'How It Works', href: '/how-it-works' },
-    { name: 'About Us', href: '/about' },
-    { name: 'Latest News', href: '/blog' },
-    { name: 'List a Property', href: '/list-property' },
+    { name: 'How It Works', href: '/' },
+    { name: 'About Us', href: '/' },
+    { name: 'Latest News', href: '/' },
+    { name: 'List a Property', href: '/' },
   ];
 
   const supportLinks = [
-    { name: 'Help Center', href: '/help' },
-    { name: 'Contact Us', href: '/contact' },
-    { name: 'Privacy Policy', href: '/privacy-policy' },
-    { name: 'Terms of Service', href: '/terms-of-service' },
-    { name: 'FAQs', href: '/faq' },
+    { name: 'Help Center', href: '/' },
+    { name: 'Contact Us', href: '/' },
+    { name: 'Privacy Policy', href: '/' },
+    { name: 'Terms of Service', href: '/' },
+    { name: 'FAQs', href: '/' },
   ];
 
   return (
@@ -165,13 +165,13 @@ const Footer = () => {
             &copy; {new Date().getFullYear()} RentEase. All rights reserved. Designed with passion for a better renting experience.
           </p>
           <div className="flex space-x-6">
-            <Link href="/privacy-policy" className="text-zinc-500 hover:text-zinc-300 transition-colors">
+            <Link href="/" className="text-zinc-500 hover:text-zinc-300 transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/terms-of-service" className="text-zinc-500 hover:text-zinc-300 transition-colors">
+            <Link href="/" className="text-zinc-500 hover:text-zinc-300 transition-colors">
               Terms of Service
             </Link>
-            <Link href="/cookie-policy" className="text-zinc-500 hover:text-zinc-300 transition-colors">
+            <Link href="/" className="text-zinc-500 hover:text-zinc-300 transition-colors">
               Cookie Preferences
             </Link>
           </div>
