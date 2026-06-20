@@ -10,6 +10,7 @@ const Navbar = () => {
     const { data } = authClient.useSession();
     const user = data?.user;
     const router = useRouter();
+    const role = user?.role.toLowerCase();
 
     const LogOut = async () => {
         await authClient.signOut({
@@ -52,7 +53,8 @@ const Navbar = () => {
                     <div className={`dropdown ${user ? '' : 'hidden'}`}>
                         <div className="flex gap-2 items-center">
 
-                            <Link className="btn font-bold text-white  bg-linear-to-r from-[#0a3d62] to-[#3498db] hover:outline outline-[#3498db] flex gap-2 items-center" href={'/dashboard'}>
+                            <Link className="btn font-bold text-white  bg-linear-to-r from-[#0a3d62] to-[#3498db] hover:outline outline-[#3498db] flex gap-2 items-center"
+                                href={`/dashboard/${role}`}>
                                 Dashboard
                             </Link>
 
