@@ -53,6 +53,11 @@ const PropertyActions = ({ propertyId, propertyName, ownerName, ownerEmail, owne
             return;
         };
 
+        if (user?.role != 'Tenant') {
+            toast.error('Please sign in as a tenant to Give Rating & Write Review');
+            return;
+        }
+
         if (!reviewText.trim()) {
             toast.error("Please write a review comment.", {
                 style: {
