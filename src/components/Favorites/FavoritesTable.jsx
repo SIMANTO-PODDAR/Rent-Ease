@@ -5,9 +5,29 @@ import toast from "react-hot-toast";
 import { MdDeleteForever } from "react-icons/md";
 
 export function FavoritesTable({ bookingData }) {
-    const remove = (i) => {
-        return toast(`Remove ${i}`)
-    }
+
+    const remove = async (itemId) => {
+        const LoadingToast = toast.loading('Removing property from your favorites...');
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-favorites/${itemId}`, {
+            method: "DELETE",
+            headers: {
+                "content-type": "application/json",
+            }
+        })
+
+        if (res.ok == true) {
+            toast.success('Property removed from favorites successfully!', {
+                id: LoadingToast
+            });
+            window.location.reload();
+        }
+        else {
+            toast.error('Failed to remove the property. Please try again.', {
+                id: LoadingToast
+            });
+        };
+    };
 
     return (
         <Table className="min-w-75 max-w-200 mx-auto mt-4">
