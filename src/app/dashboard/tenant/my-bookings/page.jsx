@@ -10,7 +10,7 @@ const MyBookingsPage = async () => {
 
     const tenantId = await session?.user?.id;
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-bookings/${tenantId}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/tenant-bookings/${tenantId}`);
 
     const bookingData = await res.json();
 

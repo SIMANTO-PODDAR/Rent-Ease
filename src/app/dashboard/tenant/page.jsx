@@ -73,7 +73,7 @@ const TenantProfile = () => {
                                 </Avatar>
 
                                 <div className="pb-2">
-                                    <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 flex items-center gap-2">
+                                    <h1 className="text-2xl mb-5 sm:text-3xl font-bold text-slate-900 flex items-center gap-2">
                                         {user?.name}
                                         {user?.emailVerified && (
                                             <ShieldCheck className="text-[#3498db]" size={24} strokeWidth={2.5} />
@@ -106,8 +106,8 @@ const TenantProfile = () => {
                             <InfoCard icon={Fingerprint} label="User Role" value={user?.role} />
                             <InfoCard
                                 icon={user?.emailVerified ? ShieldCheck : ShieldAlert}
-                                label="Account Status"
-                                value={user?.emailVerified ? "Verified" : "Action Required"}
+                                label="Email"
+                                value={user?.emailVerified ? "Verified" : "Unverified"}
                             />
                             <InfoCard icon={Calendar} label="Member Since" value={formattedJoinedDate} />
                             <InfoCard icon={Clock} label="Last Updated" value={formattedUpdatedDate} />

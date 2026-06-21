@@ -27,6 +27,11 @@ const PropertyActions = ({ propertyId, propertyName, ownerName, ownerEmail, owne
             return;
         };
 
+        if (role != 'Tenant') {
+            toast.error('Please sign in as a tenant to add Favorite');
+            return;
+        }
+
         const Data = {
             propertyId: propertyId,
             propertyName: propertyName,

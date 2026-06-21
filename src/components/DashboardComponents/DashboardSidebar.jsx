@@ -38,7 +38,7 @@ export default async function DashboardSidebar() {
       {
         group: "PROPERTY MANAGEMENT",
         items: [
-          { icon: LayoutDashboard, label: "Home", link: "/dashboard/owner" },
+          { icon: LayoutDashboard, label: "Analytics", link: "/dashboard/owner" },
           { icon: PlusSquare, label: "Add Property", link: "/dashboard/owner/add-property" },
           { icon: Building2, label: "My Properties", link: "/dashboard/owner/owner-properties" },
           { icon: ClipboardList, label: "Booking Requests", link: "/dashboard/owner/booking-requests" },
