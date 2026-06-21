@@ -13,18 +13,18 @@ const Footer = () => {
 
   const quickLinks = [
     { name: 'Browse Properties', href: '/all-properties' },
-    { name: 'How It Works', href: '/' },
-    { name: 'About Us', href: '/' },
-    { name: 'Latest News', href: '/' },
-    { name: 'List a Property', href: '/' },
+    { name: 'How It Works', href: '#' },
+    { name: 'About Us', href: '#' },
+    { name: 'Latest News', href: '#' },
+    { name: 'List a Property', href: '#' },
   ];
 
   const supportLinks = [
-    { name: 'Help Center', href: '/' },
-    { name: 'Contact Us', href: '/' },
-    { name: 'Privacy Policy', href: '/' },
-    { name: 'Terms of Service', href: '/' },
-    { name: 'FAQs', href: '/' },
+    { name: 'Help Center', href: '#' },
+    { name: 'Contact Us', href: '#' },
+    { name: 'Privacy Policy', href: '#' },
+    { name: 'Terms of Service', href: '#' },
+    { name: 'FAQs', href: '#' },
   ];
 
   return (
