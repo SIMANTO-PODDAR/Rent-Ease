@@ -77,9 +77,9 @@ const PaymentSuccessfulPage = async ({ searchParams }) => {
                             <Link href="/" className="btn flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 border-none">
                                 Back to Home
                             </Link>
-                            <a href="/my-bookings" className="btn flex-1 bg-[#0a3d62] hover:bg-[#0a3d62]/90 text-white border-none">
+                            <Link href="/dashboard/tenant/my-bookings" className="btn flex-1 bg-[#0a3d62] hover:bg-[#0a3d62]/90 text-white border-none">
                                 My Bookings
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>

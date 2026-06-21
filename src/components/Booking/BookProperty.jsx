@@ -31,7 +31,7 @@ const BookProperty = ({ propertyId, propertyName, ownerName, ownerEmail, ownerId
             //  Booking data
             bookingDate: new Date(),
             bookingStatus: 'Pending',  //            Pending (initial),  Approved,  Rejected 
-            transactionId: '',
+            // transactionId: '',
             amountPaid: Number(amountPaid),
             paymentStatus: 'Unpaid',   //            Unpaid (initial), Paid
 

@@ -22,7 +22,7 @@ export function BookingTable({ bookingData }) {
                                     <Link className="underline hover:cursor-pointer hover:text-[#0d95f0] font-bold" href={`/all-properties/${data.propertyId}`}>{data.propertyName}</Link>
                                 </Table.Cell>
                                 <Table.Cell>{new Date(data.bookingDate).toLocaleDateString()}</Table.Cell>
-                                <Table.Cell>{data.amountPaid}</Table.Cell>
+                                <Table.Cell>{data.paymentStatus == 'Unpaid' ? 0 : data.amountPaid}</Table.Cell>
                                 <Table.Cell>{data.bookingStatus}</Table.Cell>
                                 <Table.Cell>{data.paymentStatus}</Table.Cell>
                             </ Table.Row>
