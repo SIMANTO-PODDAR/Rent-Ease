@@ -2,7 +2,7 @@ import DashboardSidebar from "@/components/DashboardComponents/DashboardSidebar"
 
 export default function DashboardLayout({ children }) {
   return (
-    <div className="flex bg-background">
+    <div className="flex bg-[#3498db]/30">
       <div className="flex flex-1 overflow-hidden">
         <DashboardSidebar />
 

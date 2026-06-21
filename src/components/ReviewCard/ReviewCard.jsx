@@ -15,7 +15,7 @@ const ReviewCard = ({ review, home }) => {
                             <span className='scale-70'><Mail /></span> {review.tenantInfo.email || 'N/A'}
                         </span>
                         <span className="flex items-center gap-1">
-                            <span className='scale-70'><Calendar /></span> {review.date}
+                            <span className='scale-70'><Calendar /></span> {new Date(review.date).toLocaleDateString()}
                         </span>
                     </div>
                 </div>

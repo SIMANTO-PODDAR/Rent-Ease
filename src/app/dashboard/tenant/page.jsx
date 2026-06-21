@@ -47,7 +47,10 @@ const TenantProfile = () => {
 
 
     return (
-        <div className="min-h-screen bg-slate-50 py-10 px-4 sm:px-6 lg:px-8 font-sans">
+        <div className="min-h-screen py-5 px-4 sm:px-6 lg:px-8 font-sans">
+            <h2 className="text-4xl text-[#0a3d62] md:text-5xl font-bold mb-4 mt-5 text-center">
+                My Profile
+            </h2>
             <motion.div
                 initial="hidden"
                 animate="visible"

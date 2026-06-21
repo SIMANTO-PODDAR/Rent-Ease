@@ -23,7 +23,7 @@ export default async function DashboardSidebar() {
       {
         group: "MAIN",
         items: [
-          { icon: CalendarDays, label: "My Bookings", link: "/dashboard/tenant/bookings" },
+          { icon: CalendarDays, label: "My Bookings", link: "/dashboard/tenant/my-bookings" },
           { icon: Heart, label: "Favorites", link: "/dashboard/tenant/favorites" },
         ]
       },
