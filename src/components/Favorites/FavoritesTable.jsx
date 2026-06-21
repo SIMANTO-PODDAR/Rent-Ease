@@ -4,7 +4,7 @@ import Link from "next/link";
 import toast from "react-hot-toast";
 import { MdDeleteForever } from "react-icons/md";
 
-export function FavoritesTable({ bookingData }) {
+export function FavoritesTable({ FavoriteProperties }) {
 
     const remove = async (itemId) => {
         const LoadingToast = toast.loading('Removing property from your favorites...');
@@ -42,7 +42,7 @@ export function FavoritesTable({ bookingData }) {
 
 
                     <Table.Body>
-                        {bookingData.map((data, ind) =>
+                        {FavoriteProperties.map((data, ind) =>
                             < Table.Row key={ind}>
                                 <Table.Cell>{ind + 1}</Table.Cell>
                                 <Table.Cell>{data.propertyName}</Table.Cell>

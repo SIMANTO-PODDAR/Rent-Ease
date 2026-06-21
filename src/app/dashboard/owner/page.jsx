@@ -1,79 +1,40 @@
-"use client";
+import OwnerPageHead from '@/components/OwnerComponents/OwnerPageHead';
+import SummaryCards from '@/components/OwnerComponents/SummaryCards';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
+import React from 'react';
 
-import { BarChart3 } from "lucide-react";
-import { motion } from "framer-motion";
-import SummaryCards from "@/components/OwnerComponents/SummaryCards";
+const OwnerDashboardHome = async () => {
+    const session = await auth.api.getSession({
+        headers: await headers()
+    })
+    const ownerId = await session?.user?.id;
 
-//  Animation 
-const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: {
-            staggerChildren: 0.1,
-        },
-    },
-};
+    // Booking
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/owner-bookings/${ownerId}`);
+    const bookingData = await res.json();
 
-const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: {
-            duration: 0.5,
-            ease: "easeOut",
-        },
-    },
-};
+    const TotalBookings = bookingData.filter(
+        item => item.bookingStatus == "Approved"
+    ).length;
+    const TotalEarnings = bookingData.filter(item => item.paymentStatus == "Paid").reduce((sum, item) => sum + item.amountPaid, 0);
 
-// Main Page Component  
-export default function OwnerDashboardHome() {
+
+    //Property
+    const propertiesRes = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/owner-properties/${ownerId}`);
+    const PropertiesData = await propertiesRes.json();
+
+    const TotalProperties = PropertiesData.length;
+
 
 
     return (
-        <motion.div
-            className="mx-auto w-full max-w-6xl space-y-8 px-4 py-6 sm:px-6 lg:px-8"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-        >
-            {/* HEADER  */}
-            <motion.div
-                variants={itemVariants}
-                className="relative overflow-hidden rounded-3xl bg-linear-to-r from-[#0a3d62] to-[#3498db] p-6 sm:p-8"
-            >
-                <div className="relative z-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                    <div className="space-y-1">
-                        <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
-                            Owner Analytics
-                        </h1>
-                        <p className="max-w-2xl text-sm text-blue-100">
-                            Track your earnings, properties, and booking performance from one
-                            place.
-                        </p>
-                    </div>
-                    <div className="hidden sm:block">
-                        <div className="rounded-full bg-white/10 p-3 backdrop-blur-sm">
-                            <BarChart3 className="h-7 w-7 text-white" />
-                        </div>
-                    </div>
-                </div>
-                {/* Decorative Background Shapes */}
-                <div className="absolute right-0 top-0 h-full w-1/2 opacity-10">
-                    <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white" />
-                    <div className="absolute bottom-0 right-10 h-20 w-20 rounded-full bg-white" />
-                </div>
-            </motion.div>
+        <div className="mx-auto w-full max-w-6xl space-y-8 px-4 py-6 sm:px-6 lg:px-8">
+            <OwnerPageHead />
+            <SummaryCards TotalEarnings={TotalEarnings} TotalProperties={TotalProperties} TotalBookings={TotalBookings} />
 
-            {/* STAT CARDS */}
-            <SummaryCards TotalEarnings={33} TotalProperties={33} TotalBookings={33} />
-
-            {/* Monthly Earnings Chart */}
-
-
-        </motion.div>
+        </div>
     );
-}
+};
 
-
+export default OwnerDashboardHome;

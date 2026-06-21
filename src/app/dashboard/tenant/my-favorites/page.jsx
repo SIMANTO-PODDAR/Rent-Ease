@@ -12,7 +12,7 @@ const MyFavoritesPage = async () => {
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-favorites/${userId}`);
 
-    const bookingData = await res.json();
+    const FavoriteProperties = await res.json();
     return (
         <div className="mt-10">
             <div>
@@ -25,11 +25,11 @@ const MyFavoritesPage = async () => {
             </div>
 
             <div>
-                <FavoritesTable bookingData={bookingData} />
+                <FavoritesTable FavoriteProperties={FavoriteProperties} />
             </div>
 
             {
-                bookingData.length == 0 && (<h2 className="text-xl text-[#0a3d62] md:text-2xl font-bold mb-4 mt-4 text-center card m-3 w-80 mx-auto">
+                FavoriteProperties.length == 0 && (<h2 className="text-xl text-[#0a3d62] md:text-2xl font-bold mb-4 mt-4 text-center card m-3 w-80 mx-auto">
                     No Favorites Yet
                 </h2>)
             }

@@ -4,44 +4,46 @@ import { CardContent } from "@heroui/react";
 import { DollarSign, Building2, CalendarCheck } from "lucide-react";
 import { motion } from "framer-motion";
 
-//  Animation 
-const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: {
-            duration: 0.5,
-            ease: "easeOut",
-        },
-    },
-};
-
-const SummaryCards = ({TotalEarnings, TotalProperties, TotalBookings}) => {
+const SummaryCards = ({ TotalEarnings, TotalProperties, TotalBookings }) => {
+    const fadeUpVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.5, ease: "easeOut" }
+        }
+    };
     return (
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            <StatCard
-                title="Total Earnings"
-                value={TotalEarnings}
-                description="Revenue from successful bookings"
-                icon={DollarSign}
-                accentClass="bg-[#0a3d62]"
-            />
-            <StatCard
-                title="Total Properties"
-                value={TotalProperties}
-                description="Properties currently listed"
-                icon={Building2}
-                accentClass="bg-[#3498db]"
-            />
-            <StatCard
-                title="Total Bookings"
-                value={TotalBookings}
-                description="Confirmed bookings received"
-                icon={CalendarCheck}
-                accentClass="bg-gradient-to-r from-[#0a3d62] to-[#3498db]"
-            />
-        </div>
+        <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={fadeUpVariants}
+            className="max-w-4xl mx-auto space-y-8"
+        >
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                <StatCard
+                    title="Total Earnings"
+                    value={TotalEarnings}
+                    description="Revenue from successful bookings"
+                    icon={DollarSign}
+                    accentClass="bg-[#0a3d62]"
+                />
+                <StatCard
+                    title="Total Properties"
+                    value={TotalProperties}
+                    description="Properties currently listed"
+                    icon={Building2}
+                    accentClass="bg-[#3498db]"
+                />
+                <StatCard
+                    title="Total Bookings"
+                    value={TotalBookings}
+                    description="Confirmed bookings received"
+                    icon={CalendarCheck}
+                    accentClass="bg-gradient-to-r from-[#0a3d62] to-[#3498db]"
+                />
+            </div>
+        </motion.div>
     );
 };
 
@@ -51,6 +53,17 @@ export default SummaryCards;
 
 // Card 
 function StatCard({ title, value, description, icon: Icon, accentClass }) {
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.5,
+                ease: "easeOut",
+            },
+        },
+    };
     return (
         <motion.div variants={itemVariants}>
             <CardContent className="h-full rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md">
