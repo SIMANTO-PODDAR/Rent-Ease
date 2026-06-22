@@ -5,15 +5,10 @@ import Link from 'next/link';
 import React from 'react';
 import toast from 'react-hot-toast';
 import { FaEye } from 'react-icons/fa';
-import { GrDocumentUpdate } from 'react-icons/gr';
 import { MdDeleteForever } from 'react-icons/md';
+import PropertyUpdateBtn from '../Actions/PropertyUpdateBtn';
 
 const OwnerPropertyTable = ({ PropertyData }) => {
-
-    const UpdateProperty = (id) => {
-        toast(id)
-    }
-
     const DeleteProperty = (id) => {
         toast(id)
     }
@@ -42,14 +37,14 @@ const OwnerPropertyTable = ({ PropertyData }) => {
                                 {/* Status */}
                                 <Table.Cell className='align-middle'>
                                     {
-                                        data.status != "Rejected" ? (data.status) :
+                                        data.status != "Rejected" ? (<Button variant="ghost" className='hover:cursor-default'> {data.status} </Button>) :
                                             (<RejectionFeedbackDialog rejectionFeedback={data?.rejectionFeedback} />)
                                     }
                                 </Table.Cell>
 
                                 {/* Update */}
-                                <Table.Cell onClick={() => UpdateProperty(data._id)}>
-                                    <span className="flex items-center gap-1 hover:cursor-pointer hover:text-[#0d95f0] font-bold">Update<GrDocumentUpdate /></span>
+                                <Table.Cell>
+                                    <PropertyUpdateBtn PropertyData={data} />
                                 </Table.Cell>
 
                                 {/* Delete */}
@@ -75,7 +70,7 @@ const RejectionFeedbackDialog = ({ rejectionFeedback }) => {
             <div>
                 <AlertDialog>
 
-                    <Button variant="ghost">
+                    <Button variant="ghost" className='font-bold'>
                         Rejected <FaEye />
                     </Button>
 
