@@ -24,21 +24,21 @@ const SummaryCards = ({ TotalEarnings, TotalProperties, TotalBookings }) => {
                 <StatCard
                     title="Total Earnings"
                     value={TotalEarnings}
-                    description="Revenue from successful bookings"
+                    description="Booking payments received"
                     icon={DollarSign}
                     accentClass="bg-[#0a3d62]"
                 />
                 <StatCard
                     title="Total Properties"
                     value={TotalProperties}
-                    description="Properties currently listed"
+                    description="Properties created"
                     icon={Building2}
                     accentClass="bg-[#3498db]"
                 />
                 <StatCard
                     title="Total Bookings"
                     value={TotalBookings}
-                    description="Confirmed bookings received"
+                    description="Confirmed bookings"
                     icon={CalendarCheck}
                     accentClass="bg-gradient-to-r from-[#0a3d62] to-[#3498db]"
                 />
