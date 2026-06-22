@@ -61,7 +61,7 @@ const PropertyCard = ({ property }) => {
                         <div className="flex items-center space-x-1">
                             <Bath className="w-4 h-4 text-[#3498db]" />
                             <span className="text-sm font-medium text-gray-700">
-                                {Math.floor(property.bedrooms / 2) || 1} {Math.floor(property.bedrooms / 2) > 1 ? 'Baths' : 'Bath'}
+                                {property.bathrooms ? property.bathrooms : 0} {property.bathrooms > 1 ? 'Baths' : 'Bath'}
                             </span>
                         </div>
                         <div className="flex items-center space-x-1">
