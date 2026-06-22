@@ -3,15 +3,11 @@
 import { AlertDialog, Button, Table } from '@heroui/react';
 import Link from 'next/link';
 import React from 'react';
-import toast from 'react-hot-toast';
 import { FaEye } from 'react-icons/fa';
-import { MdDeleteForever } from 'react-icons/md';
 import PropertyUpdateBtn from '../Actions/PropertyUpdateBtn';
+import PropertyDeleteBtn from '../Actions/PropertyDeleteBtn';
 
 const OwnerPropertyTable = ({ PropertyData }) => {
-    const DeleteProperty = (id) => {
-        toast(id)
-    }
 
     return (
         <Table className="min-w-75 max-w-200 mx-auto mt-4">
@@ -48,8 +44,8 @@ const OwnerPropertyTable = ({ PropertyData }) => {
                                 </Table.Cell>
 
                                 {/* Delete */}
-                                <Table.Cell onClick={() => DeleteProperty(data._id)}>
-                                    <span className="flex items-center gap-1 hover:cursor-pointer hover:text-danger font-bold">Delete<MdDeleteForever /></span>
+                                <Table.Cell>
+                                    <PropertyDeleteBtn propertyId={data._id} propertyName={data.title} />
                                 </Table.Cell>
                             </ Table.Row>
                         )}
