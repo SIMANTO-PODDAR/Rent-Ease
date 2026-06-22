@@ -19,7 +19,7 @@ export function BookingTable({ bookingData }) {
                         {bookingData.map((data, ind) =>
                             < Table.Row key={ind}>
                                 <Table.Cell>
-                                    <Link className="underline hover:cursor-pointer hover:text-[#0d95f0] font-bold" href={`/all-properties/${data.propertyId}`}>{data.propertyName}</Link>
+                                    <Link className="hover:underline hover:cursor-pointer hover:text-[#0d95f0] font-bold" href={`/all-properties/${data.propertyId}`}>{data.propertyName}</Link>
                                 </Table.Cell>
                                 <Table.Cell>{new Date(data.bookingDate).toLocaleDateString()}</Table.Cell>
                                 <Table.Cell>{data.paymentStatus == 'Unpaid' ? 0 : data.amountPaid}</Table.Cell>

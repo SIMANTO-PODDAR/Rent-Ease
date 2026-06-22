@@ -40,7 +40,7 @@ export default async function DashboardSidebar() {
         items: [
           { icon: LayoutDashboard, label: "Analytics", link: "/dashboard/owner" },
           { icon: PlusSquare, label: "Add Property", link: "/dashboard/owner/add-property" },
-          { icon: Building2, label: "My Properties", link: "/dashboard/owner/owner-properties" },
+          { icon: Building2, label: "My Properties", link: "/dashboard/owner/my-properties" },
           { icon: ClipboardList, label: "Booking Requests", link: "/dashboard/owner/booking-requests" },
         ]
       },

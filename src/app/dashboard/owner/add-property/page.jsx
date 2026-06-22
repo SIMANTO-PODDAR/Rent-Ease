@@ -169,6 +169,7 @@ const AddPropertyPage = () => {
             image: imageUrl,
             extraFeatures: extraFeatures,
             status: "Pending",
+            rejectionFeedback: '',
             ownerId: user.id,
             owner: {
                 id: user.id,
