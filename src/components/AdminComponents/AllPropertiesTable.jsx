@@ -30,7 +30,7 @@ const AllPropertiesTable = ({ AllProperties }) => {
                                 </Table.Cell>
 
                                 {/* Update Status Btns*/}
-                                <Table.Cell className='align-middle'>
+                                <Table.Cell className='flex'>
                                     <ApproveBtn PropertyId={data._id} />
                                     <RejectBtn PropertyId={data._id} />
                                 </Table.Cell>
