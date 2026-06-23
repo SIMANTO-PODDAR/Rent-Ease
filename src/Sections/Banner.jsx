@@ -177,12 +177,12 @@ const Banner = () => {
             </div>
 
 
-            <div className="absolute bottom-0 left-0 right-0 z-10">
+            <div className="absolute -bottom-2 -left-13 -right-2 z-10">
                 <svg
                     viewBox="0 0 1440 60"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-full"
+                    className="w-full block"
                     preserveAspectRatio="none"
                 >
                     <path
