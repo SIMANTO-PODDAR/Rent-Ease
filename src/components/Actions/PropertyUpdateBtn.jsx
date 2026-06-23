@@ -68,7 +68,7 @@ const PropertyUpdateBtn = ({ PropertyData: property }) => {
     return (
         <div>
             <Modal>
-                <Button variant="ghost" className="hover:text-[#3498db] font-bold">
+                <Button variant="ghost" className="hover:text-[#3498db] font-bold" size='sm'>
                     Update<GrDocumentUpdate />
                 </Button>
                 <Modal.Backdrop>

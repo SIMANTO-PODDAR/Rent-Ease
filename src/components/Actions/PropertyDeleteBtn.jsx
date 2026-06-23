@@ -35,7 +35,7 @@ const PropertyDeleteBtn = ({ propertyId, propertyName }) => {
 
         <div>
             <AlertDialog>
-                <Button variant="danger-soft" className="font-bold">
+                <Button variant="danger-soft" className="font-bold"  size='sm'>
                     Delete<MdDeleteForever />
                 </Button>
 
