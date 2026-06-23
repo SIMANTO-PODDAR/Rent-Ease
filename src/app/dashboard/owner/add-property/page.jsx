@@ -191,7 +191,7 @@ const AddPropertyPage = () => {
 
             if (res.ok) {
                 toast.success("Property added successfully!", { id: loadingToast });
-
+                window.location.reload();
             } else {
                 const errData = await res.json().catch(() => ({}));
                 toast.error(errData.message || "Failed to add property.", { id: loadingToast });
@@ -323,7 +323,7 @@ const AddPropertyPage = () => {
                             </label>
                             <input
                                 type="number"
-                                min={1}
+                                min={0}
                                 max={1000}
                                 required
                                 value={bedrooms}
@@ -339,7 +339,7 @@ const AddPropertyPage = () => {
                             </label>
                             <input
                                 type="number"
-                                min={1}
+                                min={0}
                                 max={1000}
                                 required
                                 value={bathrooms}

@@ -6,12 +6,64 @@ import toast from 'react-hot-toast';
 
 const BookingRequestsTable = ({ bookingData }) => {
 
-    const ApproveBooking = (id) => {
-        toast(id)
+    const ApproveBooking = async (bookingId) => {
+        const LoadingToast = toast.loading('Processing your request...');
+        const Data = {
+            bookingStatus: 'Approved',
+        };
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-bookings/${bookingId}`,
+            {
+                method: "PATCH",
+                headers: {
+                    "content-type": "application/json",
+                },
+
+                body: JSON.stringify(Data)
+            });
+
+        if (res.ok == true) {
+            toast.success('Booking Status updated successfully!', {
+                id: LoadingToast
+            });
+            window.location.reload();
+        }
+
+        else {
+            toast.error('Something went wrong! Try again.', {
+                id: LoadingToast
+            });
+        };
     }
 
-    const RejectBooking = (id) => {
-        toast(id)
+    const RejectBooking = async (bookingId) => {
+        const LoadingToast = toast.loading('Processing your request...');
+        const Data = {
+            bookingStatus: 'Rejected',
+        };
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-bookings/${bookingId}`,
+            {
+                method: "PATCH",
+                headers: {
+                    "content-type": "application/json",
+                },
+
+                body: JSON.stringify(Data)
+            });
+
+        if (res.ok == true) {
+            toast.success('Booking Status updated successfully!', {
+                id: LoadingToast
+            });
+            window.location.reload();
+        }
+
+        else {
+            toast.error('Something went wrong! Try again.', {
+                id: LoadingToast
+            });
+        };
     }
 
 
