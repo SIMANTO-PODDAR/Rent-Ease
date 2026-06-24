@@ -50,7 +50,7 @@ const RejectBtn = ({ PropertyId }) => {
         <div>
 
             <Modal>
-                <Button variant="danger-soft" className="font-bold">
+                <Button variant="danger-soft" size='sm' className="font-bold">
                     Reject
                 </Button>
 

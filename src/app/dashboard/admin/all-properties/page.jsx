@@ -1,10 +1,21 @@
 import AllPropertiesTable from "@/components/AdminComponents/AllPropertiesTable";
+import Pagination from "@/components/Pagination";
 
-const AllPropertiesPage = async () => {
+const AllPropertiesPage = async ({ searchParams }) => {
+    const params = await searchParams;
+    const page = params?.page || 1;
+    const limit = 10;
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-properties/admin`);
-    const AllProperties = await res.json();
-    // console.log(AllProperties)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-properties/admin?page=${page}&limit=${limit}`, { cache: "no-store" });
+    const data = await res.json();
+    const AllProperties = data.properties || [];
+
+    const paginationData = {
+        currentPage: data.currentPage || 1,
+        totalPages: data.totalPages || 1,
+        totalItems: data.totalProperties || 0,
+        limit: limit
+    };
 
     return (
         <div className="mt-10 max-w-4xl mx-auto px-4">
@@ -18,6 +29,8 @@ const AllPropertiesPage = async () => {
             </div>
 
             <AllPropertiesTable AllProperties={AllProperties} />
+
+            <Pagination pagination={paginationData} />
 
         </div>
     );

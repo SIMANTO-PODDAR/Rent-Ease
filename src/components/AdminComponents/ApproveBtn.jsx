@@ -42,7 +42,7 @@ const ApproveBtn = ({ PropertyId }) => {
     }
 
     return (
-        <Button variant="ghost" className="hover:text-[#3498db] font-bold"
+        <Button variant="secondary" size='sm' className=" text-[#3498db] font-bold"
             onClick={() => { Approve(PropertyId) }}
         >
             Approve

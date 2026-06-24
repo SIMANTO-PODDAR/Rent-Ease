@@ -26,13 +26,23 @@ const AllPropertiesTable = ({ AllProperties }) => {
 
                                 <Table.Cell>
                                     <Link className="hover:underline hover:cursor-pointer hover:text-[#0d95f0] font-bold" href={`/all-properties/${data._id}`}>{data.title}</Link> <br />
-                                    <span className='font-bold'>{`Status: ${data.status}`}</span>
+                                    <span className='font-bold'>{`Current Status: ${data.status}`}</span>
                                 </Table.Cell>
 
                                 {/* Update Status Btns*/}
-                                <Table.Cell className='flex'>
-                                    <ApproveBtn PropertyId={data._id} />
-                                    <RejectBtn PropertyId={data._id} />
+                                <Table.Cell>
+
+                                    {data.status == "Approved" && <RejectBtn PropertyId={data._id} />                                    }
+
+                                    {data.status == "Rejected" && <ApproveBtn PropertyId={data._id} />}
+
+                                    {data.status == "Pending" &&
+                                        <span className='flex gap-2'>
+                                            <ApproveBtn PropertyId={data._id} />
+                                            <RejectBtn PropertyId={data._id} />
+                                        </span>
+                                    }
+
                                 </Table.Cell>
 
                                 {/* Update */}
