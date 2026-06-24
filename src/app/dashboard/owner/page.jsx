@@ -72,7 +72,7 @@ const OwnerDashboardHome = async () => {
 
 
     return (
-        <div className="mx-auto w-full max-w-6xl space-y-8 px-4 py-6 sm:px-6 lg:px-8">
+        <div className="mt-10 mx-auto w-full max-w-6xl space-y-8 px-4 py-6 sm:px-6 lg:px-8">
 
             {/* Section Header */}
             <OwnerPageHead />
