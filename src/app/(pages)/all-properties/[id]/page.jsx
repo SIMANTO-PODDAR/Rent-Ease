@@ -8,13 +8,7 @@ import getUserToken from '@/lib/getUserToken';
 export async function generateMetadata({ params }) {
     const { id } = await params;
     try {
-        const userToken = await getUserToken();
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-properties/${id}`, {
-            headers:
-            {
-                authorization: `Bearer ${userToken}`      // verifyUserToken
-            }
-        });
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-properties/${id}`)
         const property = await res.json();
         return {
             title: `${property.title || 'Property Details'} - Rent Ease`,
@@ -35,8 +29,13 @@ const PropertyDetailsPage = async ({ params }) => {
     let error = null;
 
     try {
+
+        const userToken = await getUserToken();
         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-properties/${id}`, {
-            cache: 'no-store'
+            headers:
+            {
+                authorization: `Bearer ${userToken}`      // verifyUserToken
+            }
         });
         if (!res.ok) {
             throw new Error('Failed to fetch property details.');
