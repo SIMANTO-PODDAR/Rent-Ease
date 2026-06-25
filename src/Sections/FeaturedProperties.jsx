@@ -3,7 +3,7 @@ import React from 'react';
 
 const FeaturedProperties = async () => {
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/featured-properties`, { cache: "no-store" });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/featured-properties`);
     const fProperties = await res.json();
 
     return (
