@@ -1,4 +1,5 @@
 'use client'
+import { authClient } from '@/lib/auth-client';
 import { Button, FieldError, Label, Modal, Surface, TextArea, TextField } from '@heroui/react';
 import React from 'react';
 import toast from 'react-hot-toast';
@@ -16,12 +17,16 @@ const RejectBtn = ({ PropertyId }) => {
             rejectionFeedback: rejectionFeedback
         };
 
+        const { data: tokenData } = await authClient.token();
+        const userToken = tokenData?.token;
+
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-properties/${PropertyId}`,
                 {
                     method: "PATCH",
                     headers: {
                         "content-type": "application/json",
+                        authorization: `Bearer ${userToken}`    // verifyUserToken
                     },
 
                     body: JSON.stringify(propertyData)

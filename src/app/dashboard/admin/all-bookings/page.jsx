@@ -1,9 +1,16 @@
+import getUserToken from '@/lib/getUserToken';
 import { Table } from '@heroui/react';
 import Link from 'next/link';
 import React from 'react';
 
 const AllBookingsPage = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-bookings`);
+    const userToken = await getUserToken();
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-bookings`, {
+        headers:
+        {
+            authorization: `Bearer ${userToken}`   // verifyUserToken
+        }
+    });
     const bookingData = await res.json();
 
     return (

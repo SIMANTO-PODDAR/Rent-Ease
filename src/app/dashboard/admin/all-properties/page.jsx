@@ -1,12 +1,20 @@
 import AllPropertiesTable from "@/components/AdminComponents/AllPropertiesTable";
 import Pagination from "@/components/Pagination";
+import getUserToken from "@/lib/getUserToken";
 
 const AllPropertiesPage = async ({ searchParams }) => {
     const params = await searchParams;
     const page = params?.page || 1;
     const limit = 10;
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-properties/admin?page=${page}&limit=${limit}`, { cache: "no-store" });
+    const userToken = await getUserToken();
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-properties/admin?page=${page}&limit=${limit}`, {
+        headers:
+        {
+            authorization: `Bearer ${userToken}`      // verifyUserToken
+        }
+    });
+
     const data = await res.json();
     const AllProperties = data.properties || [];
 

@@ -1,4 +1,5 @@
 "use client"
+import { authClient } from '@/lib/auth-client';
 import { AlertDialog, Button } from '@heroui/react';
 import React from 'react';
 import toast from 'react-hot-toast';
@@ -10,10 +11,13 @@ const PropertyDeleteBtn = ({ propertyId, propertyName }) => {
     const deleteProperty = async (propertyId) => {
         const LoadingToast = toast.loading('Processing your request...');
 
+        const { data: tokenData } = await authClient.token();
+        const userToken = tokenData?.token;
         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-properties/${propertyId}`, {
             method: "DELETE",
             headers: {
                 "content-type": "application/json",
+                authorization: `Bearer ${userToken}`    // verifyUserToken
             }
         })
 
@@ -35,7 +39,7 @@ const PropertyDeleteBtn = ({ propertyId, propertyName }) => {
 
         <div>
             <AlertDialog>
-                <Button variant="danger-soft" className="font-bold"  size='sm'>
+                <Button variant="danger-soft" className="font-bold" size='sm'>
                     Delete<MdDeleteForever />
                 </Button>
 

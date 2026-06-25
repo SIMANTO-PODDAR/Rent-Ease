@@ -1,7 +1,14 @@
 import UsersTable from "@/components/AdminComponents/UsersTable";
+import getUserToken from "@/lib/getUserToken";
 
 const AllUsersPage = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-user`);
+    const userToken = await getUserToken();
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-user`, {
+        headers:
+        {
+            authorization: `Bearer ${userToken}`   // verifyUserToken
+        }
+    });
     const UsersData = await res.json();
 
     return (

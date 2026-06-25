@@ -1,4 +1,5 @@
 'use client'
+import { authClient } from '@/lib/auth-client';
 import { Button, Table } from '@heroui/react';
 import toast from 'react-hot-toast';
 
@@ -6,6 +7,9 @@ const UsersTable = ({ UsersData }) => {
 
     const setTenant = async (userId) => {
         const LoadingToast = toast.loading('Processing your request...');
+
+        const { data: tokenData } = await authClient.token();
+        const userToken = tokenData?.token;
 
         const userRole = {
             role: "Tenant",
@@ -17,6 +21,7 @@ const UsersTable = ({ UsersData }) => {
                     method: "PATCH",
                     headers: {
                         "content-type": "application/json",
+                        authorization: `Bearer ${userToken}`    // verifyUserToken
                     },
 
                     body: JSON.stringify(userRole)
@@ -44,6 +49,9 @@ const UsersTable = ({ UsersData }) => {
     const setOwner = async (userId) => {
         const LoadingToast = toast.loading('Processing your request...');
 
+        const { data: tokenData } = await authClient.token();
+        const userToken = tokenData?.token;
+
         const userRole = {
             role: "Owner",
         };
@@ -54,6 +62,7 @@ const UsersTable = ({ UsersData }) => {
                     method: "PATCH",
                     headers: {
                         "content-type": "application/json",
+                        authorization: `Bearer ${userToken}`   // verifyUserToken
                     },
 
                     body: JSON.stringify(userRole)
