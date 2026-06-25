@@ -85,7 +85,8 @@ const BookingRequestsTable = ({ bookingData }) => {
                         <Table.Column isRowHeader>Property</Table.Column>
                         <Table.Column>Tenant Info</Table.Column>
                         <Table.Column>Booking Amount</Table.Column>
-                        <Table.Column>Updated Booking Status</Table.Column>
+                        <Table.Column>Approve</Table.Column>
+                        <Table.Column>Reject</Table.Column>
                     </Table.Header>
 
 
@@ -115,20 +116,22 @@ const BookingRequestsTable = ({ bookingData }) => {
 
                                 {/* Approve  */}
                                 <Table.Cell>
-                                    {data.bookingStatus == "Rejected" ?
-                                        (<Button
-                                            onClick={() => ApproveBooking(data._id)}
-                                        >
-                                            Approve
-                                        </Button>) :
+                                    <Button
+                                        onClick={() => ApproveBooking(data._id)}
+                                        size='sm'
+                                    >
+                                        Approve
+                                    </Button>
+                                </Table.Cell>
 
-                                        (<Button variant="danger-soft"
-                                            onClick={() => RejectBooking(data._id)}
-                                        >
-                                            Reject
-                                        </Button>)
-                                    }
-
+                                {/* Reject  */}
+                                <Table.Cell>
+                                    <Button variant="danger-soft"
+                                        onClick={() => RejectBooking(data._id)}
+                                        size='sm'
+                                    >
+                                        Reject
+                                    </Button>
                                 </Table.Cell>
                             </ Table.Row>
                         )}
