@@ -3,11 +3,18 @@ import Link from 'next/link';
 import { MapPin, Bed, Square, User, Mail, ArrowLeft } from 'lucide-react';
 import PropertyActions from '@/components/PropertyActions';
 import PropertyReviews from '@/components/PropertyReviews';
+import getUserToken from '@/lib/getUserToken';
 
 export async function generateMetadata({ params }) {
     const { id } = await params;
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-properties/${id}`);
+        const userToken = await getUserToken();
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-properties/${id}`, {
+            headers:
+            {
+                authorization: `Bearer ${userToken}`      // verifyUserToken
+            }
+        });
         const property = await res.json();
         return {
             title: `${property.title || 'Property Details'} - Rent Ease`,

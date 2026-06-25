@@ -1,4 +1,5 @@
 'use client'
+import { authClient } from "@/lib/auth-client";
 import { Table } from "@heroui/react";
 import Link from "next/link";
 import toast from "react-hot-toast";
@@ -9,10 +10,14 @@ export function FavoritesTable({ FavoriteProperties }) {
     const remove = async (itemId) => {
         const LoadingToast = toast.loading('Removing property from your favorites...');
 
+        const { data: tokenData } = await authClient.token();
+        const userToken = tokenData?.token;
+
         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-favorites/${itemId}`, {
             method: "DELETE",
             headers: {
                 "content-type": "application/json",
+                authorization: `Bearer ${userToken}`    // verifyUserToken
             }
         })
 

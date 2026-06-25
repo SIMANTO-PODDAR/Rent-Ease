@@ -39,16 +39,26 @@ const PropertyActions = ({ propertyId, propertyName, ownerName, ownerEmail, owne
             date: date,
         };
 
+        const { data: tokenData } = await authClient.token();
+        const userToken = tokenData?.token;
+
         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-favorites`, {
             method: "POST",
             headers: {
                 'content-type': 'application/json',
+                authorization: `Bearer ${userToken}`    // verifyUserToken
             },
             body: JSON.stringify(Data),
         });
 
-        setIsFavorite(true);
-        toast.success("Added to Favorites!")
+        if (res.ok == true) {
+            toast.success('Added to Favorites!');
+            setIsFavorite(true);
+        }
+
+        else {
+            toast.error('Please try again.');
+        };
     };
 
     const handleSubmitReview = async (e) => {
@@ -74,11 +84,6 @@ const PropertyActions = ({ propertyId, propertyName, ownerName, ownerEmail, owne
             return;
         }
 
-        // API call
-        // console.log(`user: ${userName}, ${userEmail}, ${date},
-        //     Rating: ${rating}, Comment: ${reviewText},
-        //     ${userId}${propertyId}  `)
-
         const Data = {
             propertyId: propertyId,
             tenantInfo: {
@@ -92,10 +97,14 @@ const PropertyActions = ({ propertyId, propertyName, ownerName, ownerEmail, owne
             role: role,
         };
 
+        const { data: tokenData } = await authClient.token();
+        const userToken = tokenData?.token;
+
         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-reviews`, {
             method: "POST",
             headers: {
                 'content-type': 'application/json',
+                authorization: `Bearer ${userToken}`    // verifyUserToken
             },
             body: JSON.stringify(Data),
         });

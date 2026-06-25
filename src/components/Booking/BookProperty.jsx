@@ -62,11 +62,14 @@ const BookProperty = ({ propertyId, propertyName, ownerName, ownerEmail, ownerId
         };
 
         // console.log(Data)
+        const { data: tokenData } = await authClient.token();
+        const userToken = tokenData?.token;
 
         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-bookings`, {
             method: "POST",
             headers: {
                 'content-type': 'application/json',
+                authorization: `Bearer ${userToken}`    // verifyUserToken
             },
             body: JSON.stringify(Data),
         });

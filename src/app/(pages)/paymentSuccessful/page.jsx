@@ -1,3 +1,4 @@
+import getUserToken from "@/lib/getUserToken";
 import { stripe } from "@/lib/stripe";
 import Link from "next/link";
 import { redirect } from 'next/navigation';
@@ -21,11 +22,14 @@ const PaymentSuccessfulPage = async ({ searchParams }) => {
         paymentStatus: 'Paid',
     };
 
+
+    const userToken = await getUserToken();
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-bookings/${bookingId}`,
         {
             method: "PATCH",
             headers: {
                 "content-type": "application/json",
+                authorization: `Bearer ${userToken}`    // verifyUserToken
             },
 
             body: JSON.stringify(Data)

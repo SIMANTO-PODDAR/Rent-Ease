@@ -1,5 +1,6 @@
 import { BookingTable } from "@/components/Booking/BookingTable";
 import { auth } from "@/lib/auth";
+import getUserToken from "@/lib/getUserToken";
 import { headers } from "next/headers";
 
 const MyBookingsPage = async () => {
@@ -10,7 +11,13 @@ const MyBookingsPage = async () => {
 
     const tenantId = await session?.user?.id;
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/tenant-bookings/${tenantId}`);
+    const userToken = await getUserToken();
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/tenant-bookings/${tenantId}`, {
+        headers:
+        {
+            authorization: `Bearer ${userToken}`      // verifyUserToken
+        }
+    });
 
     const bookingData = await res.json();
 

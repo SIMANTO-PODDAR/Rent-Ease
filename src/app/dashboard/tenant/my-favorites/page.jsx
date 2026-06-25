@@ -1,5 +1,6 @@
 import { FavoritesTable } from '@/components/Favorites/FavoritesTable';
 import { auth } from '@/lib/auth';
+import getUserToken from '@/lib/getUserToken';
 import { headers } from 'next/headers';
 import React from 'react';
 
@@ -9,8 +10,14 @@ const MyFavoritesPage = async () => {
     })
 
     const userId = await session?.user?.id;
+    const userToken = await getUserToken();
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-favorites/${userId}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-favorites/${userId}`, {
+        headers:
+        {
+            authorization: `Bearer ${userToken}`      // verifyUserToken
+        }
+    });
 
     const FavoriteProperties = await res.json();
     return (

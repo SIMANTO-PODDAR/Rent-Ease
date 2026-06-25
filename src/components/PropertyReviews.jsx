@@ -1,8 +1,15 @@
 import React from 'react';
 import ReviewCard from './ReviewCard/ReviewCard';
+import getUserToken from '@/lib/getUserToken';
 
 const PropertyReviews = async ({ propertyId }) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-reviews/${propertyId}`);
+    const userToken = await getUserToken();
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-reviews/${propertyId}`, {
+        headers:
+        {
+            authorization: `Bearer ${userToken}`      // verifyUserToken
+        }
+    });
     const reviews = await res.json();
 
     return (
