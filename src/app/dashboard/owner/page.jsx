@@ -2,6 +2,7 @@ import MonthlyEarningsChart from '@/components/OwnerComponents/MonthlyEarningsCh
 import OwnerPageHead from '@/components/OwnerComponents/OwnerPageHead';
 import SummaryCards from '@/components/OwnerComponents/SummaryCards';
 import { auth } from '@/lib/auth';
+import getUserToken from '@/lib/getUserToken';
 import { headers } from 'next/headers';
 import React from 'react';
 
@@ -10,15 +11,27 @@ const OwnerDashboardHome = async () => {
         headers: await headers()
     })
     const ownerId = await session?.user?.id;
+    const userToken = await getUserToken();
 
     // Property
-    const propertiesRes = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/owner-properties/${ownerId}`);
+    const propertiesRes = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/owner-properties/${ownerId}`, {
+        headers:
+        {
+            authorization: `Bearer ${userToken}`      // verifyUserToken
+        }
+    });
+
     const PropertiesData = await propertiesRes.json();
 
     const TotalProperties = PropertiesData.length;
 
     // Booking
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/owner-bookings/${ownerId}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/owner-bookings/${ownerId}`, {
+        headers:
+        {
+            authorization: `Bearer ${userToken}`      // verifyUserToken
+        }
+    });
     const bookingData = await res.json();
 
     const TotalBookings = bookingData.filter(

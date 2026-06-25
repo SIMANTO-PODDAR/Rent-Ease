@@ -1,4 +1,5 @@
 'use client'
+import { authClient } from '@/lib/auth-client';
 import { Button, Table } from '@heroui/react';
 import Link from 'next/link';
 import React from 'react';
@@ -12,11 +13,15 @@ const BookingRequestsTable = ({ bookingData }) => {
             bookingStatus: 'Approved',
         };
 
+        const { data: tokenData } = await authClient.token();
+        const userToken = tokenData?.token;
+
         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-bookings/${bookingId}`,
             {
                 method: "PATCH",
                 headers: {
                     "content-type": "application/json",
+                    authorization: `Bearer ${userToken}`    // verifyUserToken
                 },
 
                 body: JSON.stringify(Data)
@@ -42,11 +47,15 @@ const BookingRequestsTable = ({ bookingData }) => {
             bookingStatus: 'Rejected',
         };
 
+        const { data: tokenData } = await authClient.token();
+        const userToken = tokenData?.token;
+
         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-bookings/${bookingId}`,
             {
                 method: "PATCH",
                 headers: {
                     "content-type": "application/json",
+                    authorization: `Bearer ${userToken}`    // verifyUserToken
                 },
 
                 body: JSON.stringify(Data)
@@ -76,8 +85,7 @@ const BookingRequestsTable = ({ bookingData }) => {
                         <Table.Column isRowHeader>Property</Table.Column>
                         <Table.Column>Tenant Info</Table.Column>
                         <Table.Column>Booking Amount</Table.Column>
-                        <Table.Column>Approve</Table.Column>
-                        <Table.Column>Reject</Table.Column>
+                        <Table.Column>Updated Booking Status</Table.Column>
                     </Table.Header>
 
 
@@ -107,22 +115,20 @@ const BookingRequestsTable = ({ bookingData }) => {
 
                                 {/* Approve  */}
                                 <Table.Cell>
-                                    <Button
-                                        onClick={() => ApproveBooking(data._id)}
-                                        size='sm'
-                                    >
-                                        Approve
-                                    </Button>
-                                </Table.Cell>
+                                    {data.bookingStatus == "Rejected" ?
+                                        (<Button
+                                            onClick={() => ApproveBooking(data._id)}
+                                        >
+                                            Approve
+                                        </Button>) :
 
-                                {/* Reject  */}
-                                <Table.Cell>
-                                    <Button variant="danger-soft"
-                                        onClick={() => RejectBooking(data._id)}
-                                        size='sm'
-                                    >
-                                        Reject
-                                    </Button>
+                                        (<Button variant="danger-soft"
+                                            onClick={() => RejectBooking(data._id)}
+                                        >
+                                            Reject
+                                        </Button>)
+                                    }
+
                                 </Table.Cell>
                             </ Table.Row>
                         )}

@@ -1,5 +1,6 @@
 import BookingRequestsTable from '@/components/OwnerComponents/BookingRequestsTable';
 import { auth } from '@/lib/auth';
+import getUserToken from '@/lib/getUserToken';
 import { headers } from 'next/headers';
 
 
@@ -9,7 +10,14 @@ const BookingRequestsPage = async () => {
     })
     const ownerId = await session?.user?.id;
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/owner-bookings/${ownerId}`);
+    const userToken = await getUserToken();
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/owner-bookings/${ownerId}`, {
+        headers:
+        {
+            authorization: `Bearer ${userToken}`      // verifyUserToken
+        }
+    });
     const bookingData = await res.json();
 
 

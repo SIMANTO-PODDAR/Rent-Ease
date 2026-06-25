@@ -181,10 +181,14 @@ const AddPropertyPage = () => {
 
         const loadingToast = toast.loading("Adding property...");
         try {
+            const { data: tokenData } = await authClient.token();
+            const userToken = tokenData?.token;
+
             const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-properties`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    authorization: `Bearer ${userToken}`    // verifyUserToken
                 },
                 body: JSON.stringify(propertyData),
             });

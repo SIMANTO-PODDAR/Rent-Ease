@@ -1,5 +1,6 @@
 import OwnerPropertyTable from '@/components/OwnerComponents/OwnerPropertyTable';
 import { auth } from '@/lib/auth';
+import getUserToken from '@/lib/getUserToken';
 import { headers } from 'next/headers';
 import React from 'react';
 
@@ -9,8 +10,15 @@ const MyPropertiesPage = async () => {
     })
     const ownerId = await session?.user?.id;
 
+    const userToken = await getUserToken();
+
     // Property
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/owner-properties/${ownerId}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/owner-properties/${ownerId}`, {
+        headers:
+        {
+            authorization: `Bearer ${userToken}`      // verifyUserToken
+        }
+    });
     const PropertyData = await res.json();
     // console.log(PropertyData)
 
