@@ -1,5 +1,5 @@
 "use client"
-import GoogleLoginButton from "@/Components/GoogleLoginButton";
+import GoogleLoginButton from "@/components/GoogleLoginButton";
 import { authClient } from "@/lib/auth-client";
 import { Check, Eye, EyeSlash } from "@gravity-ui/icons";
 import { Button, Description, FieldError, Form, Input, InputGroup, Label, TextField } from "@heroui/react";
