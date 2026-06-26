@@ -11,7 +11,7 @@ import toast from 'react-hot-toast';
 export default function UnauthorizedPage() {
     const router = useRouter();
 
-    //⚠️
+    //Todo
     // useEffect(() => {
     //     const logoutUser = async () => {
     //         await authClient.signOut({

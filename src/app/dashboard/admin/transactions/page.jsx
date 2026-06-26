@@ -43,7 +43,7 @@ const TransactionsPage = async () => {
                                     {/* Transaction ID */}
                                     <Table.Cell>
                                         <p className="font-bold">
-                                            {data.transactionId}
+                                            {data.transactionId || 'N/A'}
                                         </p>
                                     </Table.Cell>
 
