@@ -11,19 +11,18 @@ import toast from 'react-hot-toast';
 export default function UnauthorizedPage() {
     const router = useRouter();
 
-    //Todo
-    // useEffect(() => {
-    //     const logoutUser = async () => {
-    //         await authClient.signOut({
-    //             fetchOptions: {
-    //                 onSuccess: () => {
-    //                     toast.error('You have been logged out.');
-    //                 },
-    //             },
-    //         });
-    //     };
-    //     logoutUser();
-    // }, []);
+    useEffect(() => {
+        const logoutUser = async () => {
+            await authClient.signOut({
+                fetchOptions: {
+                    onSuccess: () => {
+                        toast.error('You have been logged out.');
+                    },
+                },
+            });
+        };
+        logoutUser();
+    }, []);
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-50 via-sky-50 to-blue-100 p-4 sm:p-6">

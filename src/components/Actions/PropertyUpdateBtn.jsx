@@ -30,10 +30,8 @@ const PropertyUpdateBtn = ({ PropertyData: property }) => {
             bedrooms: bedrooms,
             bathrooms: bathrooms,
             description: description,
-
-            // TODO
-            // status: "Pending",
-            // rejectionFeedback: ""
+            status: "Pending",
+            rejectionFeedback: ""
         };
 
         const { data: tokenData } = await authClient.token();

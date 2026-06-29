@@ -1,10 +1,28 @@
 # Rent-Ease
 
-**Live URL:** [https://rent-ease.vercel.app](https://rent-ease-gold.vercel.app)
+**Live URL:** [https://rent-ease-by-simanto.vercel.app](https://rent-ease-by-simanto.vercel.app)
+
+**Server Repo:** [https://github.com/SIMANTO-PODDAR/rent-ease-server.git](https://github.com/SIMANTO-PODDAR/rent-ease-server.git)
 
 ## Purpose
 
-Rent-Ease is a modern, comprehensive property rental and booking platform designed to seamlessly connect tenants and property owners. The application provides an intuitive and visually appealing interface allowing users to discover high-quality rental properties, save their favorites for future reference, and book properties entirely online. With secure payment processing built-in, users can safely manage transactions. Rent-Ease also features comprehensive role-based dashboards, giving tenants control over their bookings and favorites, while providing property owners and administrators with powerful tools to manage properties, booking requests, earnings analytics, and user interactions.
+Rent-Ease is a modern, comprehensive property rental and booking platform designed to seamlessly connect tenants and property owners. The application provides an intuitive and visually appealing interface allowing users to discover high-quality rental properties, save their favorites for future reference, and book properties entirely online. With secure payment processing built-in, users can safely manage transactions. Rent-Ease also features comprehensive role-based dashboards, giving tenants control over their bookings and favorites, while providing property owners and administrators with powerful tools to manage properties, booking requests, earnings analytics, and user interactions
+
+---
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td valign="top" width="60%">
+        <img src="https://i.ibb.co.com/kstsRwbQ/Rent-Ease-desktop-view.jpg" alt="Rent-ease Desktop View" width="100%" style="border-radius: 8px;" />
+      </td>
+      <td valign="top" width="35%">
+        <img src="https://i.ibb.co.com/wh6FcQ68/Rent-Ease-mobile-view.jpg" alt="Rent-ease Mobile View" width="100%" style="border-radius: 8px;" />
+      </td>
+    </tr>
+  </table>
+</div>
+<br />
 
 ## Key Features
 
