@@ -131,10 +131,8 @@ STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
 While Rent-Ease provides a robust foundation, several enhancements are planned for the future:
 
 - **In-App Messaging:** Allow direct communication between tenants and property owners within the platform.
-- **Reviews & Ratings:** Implement a system for tenants to rate properties and leave reviews after their stay.
 - **Virtual Tours:** Integrate 3D virtual tours or video walkthroughs for properties.
 - **Multi-language Support:** Internationalize the application to support a wider global audience.
-- **Advanced Analytics:** Deeper insights and reporting for property owners regarding viewer demographics and seasonal trends.
 
 ## Conclusion
 
