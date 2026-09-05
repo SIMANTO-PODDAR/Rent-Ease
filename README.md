@@ -17,7 +17,7 @@ Rent-Ease is a modern, comprehensive property rental and booking platform design
         <img src="https://i.ibb.co.com/kstsRwbQ/Rent-Ease-desktop-view.jpg" alt="Rent-ease Desktop View" width="100%" style="border-radius: 8px;" />
       </td>
       <td valign="top" width="35%">
-        <img src="https://i.ibb.co.com/wh6FcQ68/Rent-Ease-mobile-view.jpg" alt="Rent-ease Mobile View" width="100%" style="border-radius: 8px;" />
+        <img src="https://i.ibb.co.com/Kchhg6XZ/Rent-Ease-mobile-view.jpg" alt="Rent-ease Mobile View" width="100%" style="border-radius: 8px;" />
       </td>
     </tr>
   </table>
