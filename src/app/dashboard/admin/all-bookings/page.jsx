@@ -1,20 +1,48 @@
+import Pagination from '@/components/Pagination';
 import getUserToken from '@/lib/getUserToken';
 import { Table } from '@heroui/react';
 import Link from 'next/link';
 import React from 'react';
 
-const AllBookingsPage = async () => {
+const AllBookingsPage = async ({ searchParams }) => {
+    const params = await searchParams;
+    const page = parseInt(params?.page) || 1;
+    const limit = parseInt(params?.limit) || 10;
+
     const userToken = await getUserToken();
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-bookings`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/all-bookings?page=${page}&limit=${limit}`, {
         headers:
         {
             authorization: `Bearer ${userToken}`   // verifyUserToken
-        }
+        },
+        cache: 'no-store'
     });
-    const bookingData = await res.json();
+    const data = await res.json();
+
+    let bookingData = [];
+    let totalBookings = 0;
+    let totalPages = 1;
+
+    if (Array.isArray(data)) {
+        totalBookings = data.length;
+        totalPages = Math.ceil(totalBookings / limit) || 1;
+        bookingData = data.slice((page - 1) * limit, page * limit);
+    } else {
+        bookingData = data.bookings || [];
+        totalBookings = data.totalBookings || 0;
+        totalPages = data.totalPages || 1;
+    }
+
+    const paginationData = {
+        currentPage: page,
+        totalPages: totalPages,
+        totalItems: totalBookings,
+        limit: limit,
+        itemLabel: 'bookings'
+    };
 
     return (
-        <div className="mt-10 mx-auto px-4">
+        <div className="mt-10 mx-auto px-4 max-w-5xl">
             <div className="mb-8 text-center">
                 <h2 className="text-4xl text-[#0a3d62] md:text-5xl font-bold mb-4 mt-5">
                     All Bookings
@@ -40,7 +68,7 @@ const AllBookingsPage = async () => {
                         <Table.Body>
                             {bookingData.map((data, ind) =>
                                 < Table.Row key={ind}>
-                                    <Table.Cell>{ind + 1}</Table.Cell>
+                                    <Table.Cell>{(page - 1) * limit + ind + 1}</Table.Cell>
 
                                     {/* Property Info */}
                                     <Table.Cell>
@@ -74,6 +102,8 @@ const AllBookingsPage = async () => {
                     </Table.Content>
                 </Table.ScrollContainer>
             </Table >
+
+            <Pagination pagination={paginationData} />
         </div>
     );
 };

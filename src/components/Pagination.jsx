@@ -4,15 +4,16 @@ import React, { useTransition } from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-export default function Pagination({ pagination }) {
+export default function Pagination({ pagination, hideOnSinglePage = false }) {
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
     const [isPending, startTransition] = useTransition();
 
-    const { currentPage, totalPages, totalItems, limit } = pagination;
+    const { currentPage, totalPages, totalItems, limit, itemLabel = 'properties' } = pagination;
 
-    if (totalPages <= 1) return null;
+    if (totalPages < 1 || totalItems === 0) return null;
+    if (hideOnSinglePage && totalPages <= 1) return null;
 
     const handlePageChange = (page) => {
         if (page < 1 || page > totalPages || page === currentPage) return;
@@ -66,9 +67,9 @@ export default function Pagination({ pagination }) {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-12 pt-6 border-t border-gray-100 max-w-5xl mx-auto px-4">
             {/* Info text */}
             <div className="text-sm text-gray-500 font-medium order-2 sm:order-1">
-                Showing <span className="font-semibold text-gray-800">{Math.min((currentPage - 1) * limit + 1, totalItems)}</span> to{' '}
+                Showing <span className="font-semibold text-gray-800">{totalItems === 0 ? 0 : Math.min((currentPage - 1) * limit + 1, totalItems)}</span> to{' '}
                 <span className="font-semibold text-gray-800">{Math.min(currentPage * limit, totalItems)}</span> of{' '}
-                <span className="font-semibold text-gray-800">{totalItems}</span> properties
+                <span className="font-semibold text-gray-800">{totalItems}</span> {itemLabel}
             </div>
 
             <div className="flex items-center gap-1.5 order-1 sm:order-2">
@@ -99,11 +100,10 @@ export default function Pagination({ pagination }) {
                             key={`page-${page}`}
                             onClick={() => handlePageChange(page)}
                             disabled={isPending}
-                            className={`w-10 h-10 flex items-center justify-center rounded-xl font-semibold text-sm transition-all cursor-pointer active:scale-95 ${
-                                isActive
+                            className={`w-10 h-10 flex items-center justify-center rounded-xl font-semibold text-sm transition-all cursor-pointer active:scale-95 ${isActive
                                     ? 'bg-[#0a3d62] text-white shadow-md shadow-[#0a3d62]/10'
                                     : 'border border-gray-200 text-gray-600 hover:text-gray-900 hover:bg-gray-50 hover:border-gray-300'
-                            }`}
+                                }`}
                         >
                             {page}
                         </button>

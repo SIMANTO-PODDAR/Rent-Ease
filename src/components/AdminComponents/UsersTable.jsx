@@ -3,7 +3,7 @@ import { authClient } from '@/lib/auth-client';
 import { Button, Table } from '@heroui/react';
 import toast from 'react-hot-toast';
 
-const UsersTable = ({ UsersData }) => {
+const UsersTable = ({ UsersData, currentPage = 1, limit = 10 }) => {
 
     const setTenant = async (userId) => {
         const LoadingToast = toast.loading('Processing your request...');
@@ -104,7 +104,7 @@ const UsersTable = ({ UsersData }) => {
                     <Table.Body>
                         {UsersData.map((data, ind) =>
                             < Table.Row key={ind}>
-                                <Table.Cell>{ind + 1}</Table.Cell>
+                                <Table.Cell>{(currentPage - 1) * limit + ind + 1}</Table.Cell>
 
                                 {/* Name*/}
                                 <Table.Cell>
