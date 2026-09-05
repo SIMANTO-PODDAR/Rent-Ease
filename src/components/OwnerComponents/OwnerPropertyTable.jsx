@@ -7,7 +7,7 @@ import { FaEye } from 'react-icons/fa';
 import PropertyUpdateBtn from '../Actions/PropertyUpdateBtn';
 import PropertyDeleteBtn from '../Actions/PropertyDeleteBtn';
 
-const OwnerPropertyTable = ({ PropertyData }) => {
+const OwnerPropertyTable = ({ PropertyData, currentPage = 1, limit = 10 }) => {
 
     return (
         <Table className="min-w-75 max-w-200 mx-auto mt-4">
@@ -25,7 +25,7 @@ const OwnerPropertyTable = ({ PropertyData }) => {
                     <Table.Body>
                         {PropertyData.map((data, ind) =>
                             < Table.Row key={ind}>
-                                <Table.Cell>{ind + 1}</Table.Cell>
+                                <Table.Cell>{(currentPage - 1) * limit + ind + 1}</Table.Cell>
                                 <Table.Cell>
                                     <Link className="hover:underline hover:cursor-pointer hover:text-[#0d95f0] font-bold" href={`/all-properties/${data._id}`}>{data.title}</Link>
                                 </Table.Cell>

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import React from 'react';
 import toast from 'react-hot-toast';
 
-const BookingRequestsTable = ({ bookingData }) => {
+const BookingRequestsTable = ({ bookingData, currentPage = 1, limit = 10 }) => {
 
     const ApproveBooking = async (bookingId) => {
         const LoadingToast = toast.loading('Processing your request...');
@@ -93,7 +93,7 @@ const BookingRequestsTable = ({ bookingData }) => {
                     <Table.Body>
                         {bookingData.map((data, ind) =>
                             < Table.Row key={ind}>
-                                <Table.Cell>{ind + 1}</Table.Cell>
+                                <Table.Cell>{(currentPage - 1) * limit + ind + 1}</Table.Cell>
 
                                 {/* Property */}
                                 <Table.Cell className='text-[10px] lg:text-sm'>
