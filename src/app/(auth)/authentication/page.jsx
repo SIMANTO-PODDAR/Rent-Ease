@@ -294,7 +294,7 @@ const AuthenticationContent = () => {
           </button>
         </div>
         <p className="text-[11px] text-center text-slate-400 mt-2 sm:hidden">
-          Swipe left or right to switch modes
+          Swipe to switch modes
         </p>
       </div>
 
