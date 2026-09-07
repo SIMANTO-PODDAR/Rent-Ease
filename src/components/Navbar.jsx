@@ -126,18 +126,11 @@ const Navbar = () => {
                     ) : (
                         <div className="flex items-center gap-1 sm:gap-2">
                             <Link
-                                href="/login"
-                                className="px-2.5 sm:px-4 py-1.5 sm:py-2.5 rounded-lg sm:rounded-xl text-xs sm:text-sm font-bold text-[#0a3d62] hover:bg-slate-100 transition-all"
-                            >
-                                Login
-                            </Link>
-
-                            <Link
-                                href="/registration"
+                                href="/authentication"
                                 className="flex items-center gap-1 px-2.5 sm:px-4 py-1.5 sm:py-2.5 rounded-lg sm:rounded-xl text-xs sm:text-sm font-bold text-white bg-linear-to-r from-[#0a3d62] to-[#3498db] hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xs"
                             >
                                 <UserPlus className="size-3.5 sm:size-4" />
-                                <span>Registration</span>
+                                <span>Login & Registration</span>
                             </Link>
                         </div>
                     )}
