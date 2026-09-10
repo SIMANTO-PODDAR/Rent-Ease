@@ -118,12 +118,16 @@ MONGODB_URI=your_mongodb_connection_string
 BETTER_AUTH_SECRET=your_auth_secret_key
 BETTER_AUTH_URL=http://localhost:3000
 
+# Google OAuth
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+
 # Stripe
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
 STRIPE_SECRET_KEY=your_stripe_secret_key
-STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
 
-# Other necessary variables as needed by the application
+# Backend API
+NEXT_PUBLIC_BASE_URL=http://localhost:5000
 ```
 
 ## Future Improvements

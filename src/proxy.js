@@ -9,7 +9,7 @@ export async function proxy(request) {
     if (session) {
         return NextResponse.next();
     };
-    return NextResponse.redirect(new URL('/login', request.url));
+    return NextResponse.redirect(new URL('/authentication', request.url));
 };
 
 export const config = {
