@@ -30,28 +30,23 @@ const BookProperty = ({ propertyId, propertyName, ownerName, ownerEmail, ownerId
         const Data = {
             //  Booking data
             bookingDate: new Date(),
-            bookingStatus: 'Pending',  //            Pending (initial),  Approved,  Rejected 
-            // transactionId: '',
+            bookingStatus: 'Pending',
             amountPaid: Number(amountPaid),
-            paymentStatus: 'Unpaid',   //            Unpaid (initial), Paid
-
+            paymentStatus: 'Unpaid',
 
             //  Property Info
             propertyId: propertyId,
             propertyName: propertyName,
-
 
             //  Owner Info 
             ownerName: ownerName,
             ownerEmail: ownerEmail,
             ownerId: ownerId,
 
-
             //  Login Tenant Info
             tenantId: user?.id,
             tenantName: user?.name,
             tenantEmail: user?.email,
-
 
             //  Form data & user info
             moveInDate: event.target.moveInDate.value,
@@ -60,6 +55,10 @@ const BookProperty = ({ propertyId, propertyName, ownerName, ownerEmail, ownerId
             userEmail: event.target.userEmail.value,
             additionalNotes: event.target.additionalNotes.value,
         };
+
+        import("@/lib/tracking").then(({ trackEvent }) => {
+            trackEvent("BOOKING_INITIATED", { propertyId, amountPaid });
+        });
 
         // console.log(Data)
         const { data: tokenData } = await authClient.token();
@@ -84,6 +83,10 @@ const BookProperty = ({ propertyId, propertyName, ownerName, ownerEmail, ownerId
 
         const booking = await res.json();
 
+        import("@/lib/tracking").then(({ trackEvent }) => {
+            trackEvent("BOOKING_CREATED", { propertyId, bookingId: booking.insertedId });
+        });
+
         const formData = new FormData();
 
         formData.append("bookingId", booking.insertedId);
@@ -96,6 +99,10 @@ const BookProperty = ({ propertyId, propertyName, ownerName, ownerEmail, ownerId
         });
 
         const paymentData = await paymentRes.json();
+
+        import("@/lib/tracking").then(({ trackEvent }) => {
+            trackEvent("PAYMENT_STARTED", { bookingId: booking.insertedId, amountPaid });
+        });
 
         window.location.href = paymentData.url;
 

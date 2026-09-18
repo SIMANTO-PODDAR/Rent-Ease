@@ -17,6 +17,9 @@ const Navbar = () => {
     const role = (user?.role || "tenant").toLowerCase();
 
     const LogOut = async () => {
+        const { trackEvent } = await import("@/lib/tracking");
+        await trackEvent("LOGOUT");
+
         await authClient.signOut({
             fetchOptions: {
                 onSuccess: () => {

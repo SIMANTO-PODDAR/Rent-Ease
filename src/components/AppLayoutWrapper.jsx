@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import TrackingProvider from "@/components/TrackingProvider";
 
 const AUTH_ROUTES = ["/authentication", "/auth"];
 
@@ -19,17 +20,17 @@ export default function AppLayoutWrapper({ children }) {
 
   // Authentication pages 
   if (isAuthRoute) {
-    return <>{children}</>;
+    return <TrackingProvider>{children}</TrackingProvider>;
   }
 
   // Normal application pages 
   return (
-    <>
+    <TrackingProvider>
       <div className="container mx-auto">
         <Navbar />
         {children}
       </div>
       <Footer />
-    </>
+    </TrackingProvider>
   );
 }

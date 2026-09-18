@@ -42,6 +42,10 @@ const LoginForm = ({ onSwitchToRegister }) => {
       toast.success("Login successfully.", {
         id: loadingToast,
       });
+      // Fire tracking event
+      import("@/lib/tracking").then(({ trackEvent }) => {
+        trackEvent("LOGIN");
+      });
       router.push("/");
     }
 

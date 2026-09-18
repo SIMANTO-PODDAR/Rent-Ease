@@ -2,6 +2,7 @@ import getUserToken from "@/lib/getUserToken";
 import { stripe } from "@/lib/stripe";
 import Link from "next/link";
 import { redirect } from 'next/navigation';
+import TrackPayment from "@/components/TrackPayment";
 
 const PaymentSuccessfulPage = async ({ searchParams }) => {
 
@@ -38,6 +39,7 @@ const PaymentSuccessfulPage = async ({ searchParams }) => {
     if (res.ok == true) {
         return (
             <div className="min-h-screen flex items-center justify-center">
+                <TrackPayment bookingId={bookingId} transactionId={transactionId} />
                 <div className="card w-full max-w-md bg-base-100 shadow-xl">
                     <div className="card-body items-center text-center p-8">
                         {/* Success Icon */}

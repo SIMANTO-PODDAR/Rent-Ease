@@ -56,6 +56,9 @@ const RegisterForm = ({ onSwitchToLogin }) => {
           toast.success("Registration completed successfully.", {
             id: loadingToast,
           });
+          import("@/lib/tracking").then(({ trackEvent }) => {
+            trackEvent("REGISTER");
+          });
           await authClient.signOut();
           onSwitchToLogin();
         },

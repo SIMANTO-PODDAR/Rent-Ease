@@ -41,6 +41,9 @@ export default function PropertyFilter({ initialSearch, initialPropertyType, ini
         }
 
         startTransition(() => {
+            import("@/lib/tracking").then(({ trackEvent }) => {
+                trackEvent("PROPERTY_SEARCH", { search, propertyType, sort });
+            });
             router.push(`${pathname}?${params.toString()}`);
         });
     };

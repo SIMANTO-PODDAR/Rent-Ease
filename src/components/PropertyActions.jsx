@@ -23,6 +23,10 @@ const PropertyActions = ({ propertyId, propertyName, ownerName, ownerEmail, owne
     const role = user?.role;
 
     useEffect(() => {
+        import("@/lib/tracking").then(({ trackEvent }) => {
+            trackEvent("PROPERTY_VIEW", { propertyId });
+        });
+        
         let isMounted = true;
 
         const checkFavoriteStatus = async () => {
@@ -117,6 +121,9 @@ const PropertyActions = ({ propertyId, propertyName, ownerName, ownerEmail, owne
                     if (res.ok) {
                         setIsFavorite(false);
                         setFavoriteId(null);
+                        import("@/lib/tracking").then(({ trackEvent }) => {
+                            trackEvent("FAVORITE_REMOVED", { propertyId });
+                        });
                         toast.success('Removed from Favorites');
                     } else {
                         toast.error('Failed to remove from favorites. Try again.');
@@ -124,6 +131,9 @@ const PropertyActions = ({ propertyId, propertyName, ownerName, ownerEmail, owne
                 } else {
                     setIsFavorite(false);
                     setFavoriteId(null);
+                    import("@/lib/tracking").then(({ trackEvent }) => {
+                        trackEvent("FAVORITE_REMOVED", { propertyId });
+                    });
                     toast.success('Removed from Favorites');
                 }
             } else {
@@ -147,6 +157,9 @@ const PropertyActions = ({ propertyId, propertyName, ownerName, ownerEmail, owne
                     const result = await res.json();
                     setIsFavorite(true);
                     setFavoriteId(result.insertedId || result._id || null);
+                    import("@/lib/tracking").then(({ trackEvent }) => {
+                        trackEvent("FAVORITE_ADDED", { propertyId });
+                    });
                     toast.success('Added to Favorites!');
                 } else {
                     toast.error('Please try again.');
@@ -209,6 +222,9 @@ const PropertyActions = ({ propertyId, propertyName, ownerName, ownerEmail, owne
         });
 
         if (res.ok == true) {
+            import("@/lib/tracking").then(({ trackEvent }) => {
+                trackEvent("REVIEW_SUBMITTED", { propertyId, rating });
+            });
             toast.success('Rating successful.');
 
             setTimeout(() => {
