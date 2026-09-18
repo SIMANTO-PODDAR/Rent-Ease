@@ -8,6 +8,7 @@ import {
   Building2, ClipboardList, Users, CalendarCheck, CreditCard,
   Settings, Menu
 } from "lucide-react";
+import { SiCircuitverse } from "react-icons/si";
 
 export default async function DashboardSidebar() {
 
@@ -56,6 +57,7 @@ export default async function DashboardSidebar() {
         group: "MANAGEMENT",
         items: [
           { icon: Users, label: "All Users", link: "/dashboard/admin/all-users" },
+          { icon: SiCircuitverse, label: "Activity Monitor", link: "/dashboard/admin/activity-monitor" },
           { icon: Building2, label: "All Properties", link: "/dashboard/admin/all-properties" },
           { icon: CalendarCheck, label: "All Bookings", link: "/dashboard/admin/all-bookings" },
           { icon: CreditCard, label: "Transactions", link: "/dashboard/admin/transactions" },
