@@ -11,7 +11,7 @@ export const verifyRole = async (role) => {
     const user = await session?.user;
 
     if (!user) {
-        redirect('/login')
+        redirect('/authentication')
     }
 
     if (user?.role != role) {

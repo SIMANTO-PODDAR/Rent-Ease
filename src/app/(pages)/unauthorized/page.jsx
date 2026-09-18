@@ -107,7 +107,7 @@ export default function UnauthorizedPage() {
                     </motion.div>
 
                     <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full sm:w-auto">
-                        <Link href="/login" className="btn btn-outline btn-info w-full sm:w-auto bg-white/50 border-blue-200 hover:bg-blue-50 hover:border-blue-300 hover:text-[#3498db]/90 text-[#3498db]">
+                        <Link href="/authentication" className="btn btn-outline btn-info w-full sm:w-auto bg-white/50 border-blue-200 hover:bg-blue-50 hover:border-blue-300 hover:text-[#3498db]/90 text-[#3498db]">
                             <LogIn className="w-4 h-4 mr-1" /> Login
                         </Link>
                     </motion.div>

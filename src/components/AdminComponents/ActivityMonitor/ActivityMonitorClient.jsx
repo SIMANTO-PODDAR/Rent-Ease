@@ -28,6 +28,7 @@ const ActivityMonitorClient = () => {
   const [page, setPage] = useState(1);
   const [limit] = useState(15);
   const [totalPages, setTotalPages] = useState(1);
+  const [totalItems, setTotalItems] = useState(0);
 
   const [roleFilter, setRoleFilter] = useState("All");
   const [statusFilter, setStatusFilter] = useState("All");
@@ -66,7 +67,7 @@ const ActivityMonitorClient = () => {
         // Fetch Stats
         const statsRes = await fetch(
           `${process.env.NEXT_PUBLIC_BASE_URL}/admin/tracking-stats`,
-          { headers },
+          { headers }
         );
         if (statsRes.ok) {
           const statsData = await statsRes.json();
@@ -84,18 +85,24 @@ const ActivityMonitorClient = () => {
 
         const sessionsRes = await fetch(
           `${process.env.NEXT_PUBLIC_BASE_URL}/admin/tracking-sessions?${queryParams}`,
-          { headers },
+          { headers }
         );
         if (sessionsRes.ok) {
           const sessionsData = await sessionsRes.json();
           setSessions(sessionsData.sessions || []);
           setTotalPages(sessionsData.totalPages || 1);
+          setTotalItems(
+            sessionsData.totalItems ||
+              (sessionsData.sessions
+                ? (page - 1) * limit + sessionsData.sessions.length
+                : 0)
+          );
 
           // If a session is selected, update it with fresh data
           setSelectedSession((prev) => {
             if (prev) {
               const updatedSelected = (sessionsData.sessions || []).find(
-                (s) => s.sessionId === prev.sessionId,
+                (s) => s.sessionId === prev.sessionId
               );
               if (updatedSelected) {
                 return updatedSelected;
@@ -115,7 +122,7 @@ const ActivityMonitorClient = () => {
         setRefreshing(false);
       }
     },
-    [page, limit, roleFilter, statusFilter, debouncedSearch],
+    [page, limit, roleFilter, statusFilter, debouncedSearch]
   );
 
   // Initial load and dependency changes
@@ -124,7 +131,7 @@ const ActivityMonitorClient = () => {
   }, [fetchData]);
 
   const fetchDataRef = useRef(fetchData);
-  
+
   useEffect(() => {
     fetchDataRef.current = fetchData;
   }, [fetchData]);
@@ -162,21 +169,22 @@ const ActivityMonitorClient = () => {
   };
 
   const renderStatusIndicator = (status, lastActiveAt) => {
-    // use timestamp directly to avoid Date.now() in render
-    // Actually, we can just do the comparison in the render without triggering strict mode Date.now() rule if we are careful, or just suppress it.
-    // Wait, let's use a standard JS trick: `new Date().getTime()` is also impure.
-    // We can just rely on the backend `status === 'active'` since it's already calculated!
-    // But backend status might be stale if we don't refresh often.
-    // Let's just use a state for `now` or just use the backend status for simplicity to fix lint.
-    const isActive = status === "active";
+    const isRecentlyActive = lastActiveAt
+      ? now - new Date(lastActiveAt).getTime() < 1 * 60 * 1000
+      : false;
+    const isActive = isRecentlyActive;
 
     return (
       <div className="flex items-center gap-2">
         <span
-          className={`w-2.5 h-2.5 rounded-full ${isActive ? "bg-green-500" : "bg-gray-400"}`}
+          className={`w-2.5 h-2.5 rounded-full ${
+            isActive ? "bg-green-500" : "bg-gray-400"
+          }`}
         ></span>
         <span
-          className={`text-sm ${isActive ? "text-green-700 font-medium" : "text-gray-600"}`}
+          className={`text-sm ${
+            isActive ? "text-green-700 font-medium" : "text-gray-600"
+          }`}
         >
           {isActive ? "Active" : "Inactive"}
         </span>
@@ -196,7 +204,7 @@ const ActivityMonitorClient = () => {
             <div>
               <p className="text-sm text-gray-500 font-medium">Active Now</p>
               <h3 className="text-2xl font-bold text-gray-800">
-                {stats ? stats.activeNow : '0'}
+                {stats ? stats.activeNow : "0"}
               </h3>
             </div>
           </div>
@@ -209,7 +217,7 @@ const ActivityMonitorClient = () => {
             <div>
               <p className="text-sm text-gray-500 font-medium">Guests</p>
               <h3 className="text-2xl font-bold text-gray-800">
-                {stats ? stats.guests : '0'}
+                {stats ? stats.guests : "0"}
               </h3>
             </div>
           </div>
@@ -222,7 +230,7 @@ const ActivityMonitorClient = () => {
             <div>
               <p className="text-sm text-gray-500 font-medium">Tenants</p>
               <h3 className="text-2xl font-bold text-gray-800">
-                {stats ? stats.tenants : '0'}
+                {stats ? stats.tenants : "0"}
               </h3>
             </div>
           </div>
@@ -235,7 +243,7 @@ const ActivityMonitorClient = () => {
             <div>
               <p className="text-sm text-gray-500 font-medium">Owners</p>
               <h3 className="text-2xl font-bold text-gray-800">
-                {stats ? stats.owners : '0'}
+                {stats ? stats.owners : "0"}
               </h3>
             </div>
           </div>
@@ -291,7 +299,11 @@ const ActivityMonitorClient = () => {
           disabled={refreshing}
           className="flex items-center gap-2 bg-blue-50 text-blue-600 hover:bg-blue-100 px-4 py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {refreshing ? <CgSpinner className="animate-spin" size={18} /> : <RefreshCw size={18} />}
+          {refreshing ? (
+            <CgSpinner className="animate-spin" size={18} />
+          ) : (
+            <RefreshCw size={18} />
+          )}
           Refresh
         </button>
       </div>
@@ -335,9 +347,13 @@ const ActivityMonitorClient = () => {
                   <td className="px-4 py-3">
                     <div className="font-medium text-gray-800">
                       {session.role === "Guest"
-                        ? `Guest #${session.visitorId?.substring(0, 6).toUpperCase()}`
+                        ? `Guest #${session.visitorId
+                            ?.substring(0, 6)
+                            .toUpperCase()}`
                         : session.userInfo?.name ||
-                          `User #${session.userId?.substring(0, 6).toUpperCase()}`}
+                          `User #${session.userId
+                            ?.substring(0, 6)
+                            .toUpperCase()}`}
                     </div>
                     {session.userInfo?.email && (
                       <div className="text-xs text-gray-500">
@@ -351,8 +367,8 @@ const ActivityMonitorClient = () => {
                         session.role === "Guest"
                           ? "bg-gray-100 text-gray-700"
                           : session.role === "Tenant"
-                            ? "bg-purple-100 text-purple-700"
-                            : "bg-orange-100 text-orange-700"
+                          ? "bg-purple-100 text-purple-700"
+                          : "bg-orange-100 text-orange-700"
                       }`}
                     >
                       {session.role}
@@ -398,7 +414,10 @@ const ActivityMonitorClient = () => {
                     </div>
                   </td>
                   <td className="px-4 py-3">
-                    {renderStatusIndicator(session.status, session.lastActiveAt)}
+                    {renderStatusIndicator(
+                      session.status,
+                      session.lastActiveAt
+                    )}
                   </td>
                 </tr>
               ))
@@ -409,13 +428,14 @@ const ActivityMonitorClient = () => {
         {totalPages > 1 && (
           <div className="flex w-full justify-center p-4 border-t border-gray-100">
             <Pagination
-              isCompact
-              showControls
-              showShadow
-              color="primary"
-              page={page}
-              total={totalPages}
-              onChange={(p) => setPage(p)}
+              pagination={{
+                currentPage: page,
+                totalPages: totalPages,
+                totalItems: totalItems,
+                limit: limit,
+                itemLabel: "sessions",
+              }}
+              onPageChange={(p) => setPage(p)}
             />
           </div>
         )}

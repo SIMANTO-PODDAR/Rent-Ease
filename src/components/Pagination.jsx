@@ -4,7 +4,7 @@ import React, { useTransition } from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-export default function Pagination({ pagination, hideOnSinglePage = false }) {
+export default function Pagination({ pagination, hideOnSinglePage = false, onPageChange }) {
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
@@ -17,6 +17,11 @@ export default function Pagination({ pagination, hideOnSinglePage = false }) {
 
     const handlePageChange = (page) => {
         if (page < 1 || page > totalPages || page === currentPage) return;
+
+        if (onPageChange) {
+            onPageChange(page);
+            return;
+        }
 
         const params = new URLSearchParams(searchParams.toString());
         params.set('page', page);

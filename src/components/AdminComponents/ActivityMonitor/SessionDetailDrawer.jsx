@@ -82,7 +82,10 @@ const SessionDetailDrawer = ({ isOpen, onOpenChange, session }) => {
   };
 
   const getStatusIndicator = () => {
-    const isActive = session.status === "active";
+    const isRecentlyActive = session.lastActiveAt
+      ? Date.now() - new Date(session.lastActiveAt).getTime() < 1 * 60 * 1000
+      : false;
+    const isActive = isRecentlyActive;
     return (
       <div className="flex items-center gap-2 bg-gray-50 px-3 py-1 rounded-full border border-gray-100">
         <span
