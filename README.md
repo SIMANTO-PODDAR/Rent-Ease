@@ -26,16 +26,17 @@ Rent-Ease is a modern, comprehensive property rental and booking platform design
 
 ## Key Features
 
-- **Advanced Search & Filtering:** Find rental properties easily with robust search and filtering capabilities.
-- **Favorites Management:** Save favorite properties to your profile for later consideration.
-- **Seamless Online Booking:** Book properties online with a straightforward, user-friendly booking flow.
-- **Secure Payments:** Secure Stripe payment integration for trustworthy and safe financial transactions.
-- **Tenant Dashboard:** Dedicated portal for tenants to easily manage active bookings and view saved favorites.
-- **Owner Dashboard:** Comprehensive toolkit for property management, handling booking requests, and viewing earnings analytics.
 - **Admin Dashboard:** Centralized control center for managing users, overseeing all properties, moderating bookings, and tracking transactions.
+- **Real-Time Activity Monitoring:** Dedicated admin monitor to track live visitors, active sessions, user devices, geographical locations, and page navigation in real-time.
+- **Tenant Dashboard:** Dedicated portal for tenants to easily manage active bookings and view saved favorites.
+- **Seamless Online Booking:** Book properties online with a straightforward, user-friendly booking flow.
+- **Favorites Management:** Save favorite properties to your profile for later consideration.
+- **Secure Payments:** Secure Stripe payment integration for trustworthy and safe financial transactions.
+- **Advanced Search & Filtering:** Find rental properties easily with robust search and filtering capabilities.
+- **Owner Dashboard:** Comprehensive toolkit for property management, handling booking requests, and viewing earnings analytics.
 - **Role-Based Authentication:** Secure system with protected routes ensuring users only access information appropriate to their role (Tenant, Owner, Admin).
-- **Responsive Design:** Fully responsive UI providing an optimal experience across mobile, tablet, and desktop devices.
-- **Modern UI/UX:** Engaging user interface featuring interactive charts and smooth, modern UI animations.
+<!-- - **Responsive Design:** Fully responsive UI providing an optimal experience across mobile, tablet, and desktop devices.
+- **Modern UI/UX:** Engaging user interface featuring interactive charts and smooth, modern UI animations. -->
 
 ## Tech Stack & npm Packages
 
@@ -43,34 +44,34 @@ The project utilizes a modern Next.js ecosystem, categorized by their purpose be
 
 ### Dependencies
 
-| Package | Version | Purpose |
-| :--- | :--- | :--- |
-| `next` | `16.2.9` | React framework for production (App Router) |
-| `react` / `react-dom` | `19.2.4` | Core UI library |
-| `better-auth` | `^1.6.19` | Complete authentication solution |
-| `@better-auth/mongo-adapter` | `^1.6.19` | MongoDB adapter for better-auth |
-| `mongodb` | `^7.3.0` | Official MongoDB database driver |
-| `stripe` | `^22.2.1` | Stripe Node.js library for backend payment processing |
-| `@stripe/stripe-js` | `^9.8.0` | Stripe.js for frontend checkout and elements |
-| `@heroui/react` | `^3.2.1` | Modern React UI component library |
-| `motion` | `^12.40.0` | Production-ready animation library |
-| `recharts` | `^3.8.1` | Composable charting library for React |
-| `lucide-react` | `^1.20.0` | Beautiful and consistent icon set |
-| `react-icons` | `^5.6.0` | Additional popular icons |
-| `react-fast-marquee` | `^1.6.5` | React component for smooth marquees |
-| `react-hot-toast` | `^2.6.0` | Smoking hot React notifications |
+| Package                      | Version    | Purpose                                               |
+| :--------------------------- | :--------- | :---------------------------------------------------- |
+| `next`                       | `16.2.9`   | React framework for production (App Router)           |
+| `react` / `react-dom`        | `19.2.4`   | Core UI library                                       |
+| `better-auth`                | `^1.6.19`  | Complete authentication solution                      |
+| `@better-auth/mongo-adapter` | `^1.6.19`  | MongoDB adapter for better-auth                       |
+| `mongodb`                    | `^7.3.0`   | Official MongoDB database driver                      |
+| `stripe`                     | `^22.2.1`  | Stripe Node.js library for backend payment processing |
+| `@stripe/stripe-js`          | `^9.8.0`   | Stripe.js for frontend checkout and elements          |
+| `@heroui/react`              | `^3.2.1`   | Modern React UI component library                     |
+| `motion`                     | `^12.40.0` | Production-ready animation library                    |
+| `recharts`                   | `^3.8.1`   | Composable charting library for React                 |
+| `lucide-react`               | `^1.20.0`  | Beautiful and consistent icon set                     |
+| `react-icons`                | `^5.6.0`   | Additional popular icons                              |
+| `react-fast-marquee`         | `^1.6.5`   | React component for smooth marquees                   |
+| `react-hot-toast`            | `^2.6.0`   | Smoking hot React notifications                       |
 
 ### Dev Dependencies
 
-| Package | Version | Purpose |
-| :--- | :--- | :--- |
-| `tailwindcss` | `^4` | Utility-first CSS framework |
-| `@tailwindcss/postcss` | `^4` | PostCSS plugin for Tailwind CSS |
-| `daisyui` | `^5.5.23` | Tailwind CSS component library |
-| `@gravity-ui/icons` | `^2.18.0` | Additional SVG icons for UI |
-| `eslint` | `^9` | Pluggable linting utility |
-| `eslint-config-next` | `16.2.9` | ESLint configuration for Next.js |
-| `babel-plugin-react-compiler` | `1.0.0` | React compiler optimization |
+| Package                       | Version   | Purpose                          |
+| :---------------------------- | :-------- | :------------------------------- |
+| `tailwindcss`                 | `^4`      | Utility-first CSS framework      |
+| `@tailwindcss/postcss`        | `^4`      | PostCSS plugin for Tailwind CSS  |
+| `daisyui`                     | `^5.5.23` | Tailwind CSS component library   |
+| `@gravity-ui/icons`           | `^2.18.0` | Additional SVG icons for UI      |
+| `eslint`                      | `^9`      | Pluggable linting utility        |
+| `eslint-config-next`          | `16.2.9`  | ESLint configuration for Next.js |
+| `babel-plugin-react-compiler` | `1.0.0`   | React compiler optimization      |
 
 ## Installation & Setup
 

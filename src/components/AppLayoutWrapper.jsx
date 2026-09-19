@@ -1,8 +1,8 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Navbar from "@/Sections/Navbar";
+import Footer from "@/Sections/Footer";
 import TrackingProvider from "@/components/TrackingProvider";
 
 const AUTH_ROUTES = ["/authentication", "/auth"];
@@ -13,17 +13,17 @@ export default function AppLayoutWrapper({ children }) {
   // Check
   const isAuthRoute = Boolean(
     pathname &&
-    AUTH_ROUTES.some(
-      (route) => pathname === route || pathname.startsWith(`${route}/`)
-    )
+      AUTH_ROUTES.some(
+        (route) => pathname === route || pathname.startsWith(`${route}/`)
+      )
   );
 
-  // Authentication pages 
+  // Authentication pages
   if (isAuthRoute) {
     return <TrackingProvider>{children}</TrackingProvider>;
   }
 
-  // Normal application pages 
+  // Normal application pages
   return (
     <TrackingProvider>
       <div className="container mx-auto">

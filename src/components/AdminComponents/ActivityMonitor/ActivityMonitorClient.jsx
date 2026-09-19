@@ -203,8 +203,12 @@ const ActivityMonitorClient = () => {
             </div>
             <div>
               <p className="text-sm text-gray-500 font-medium">Active Now</p>
-              <h3 className="text-2xl font-bold text-gray-800">
-                {stats ? stats.activeNow : "0"}
+              <h3
+                className={`${
+                  stats ? "text-2xl" : "text-sm"
+                } font-bold text-gray-800`}
+              >
+                {stats ? stats.activeNow : "Loading..."}
               </h3>
             </div>
           </div>
@@ -216,8 +220,12 @@ const ActivityMonitorClient = () => {
             </div>
             <div>
               <p className="text-sm text-gray-500 font-medium">Guests</p>
-              <h3 className="text-2xl font-bold text-gray-800">
-                {stats ? stats.guests : "0"}
+              <h3
+                className={`${
+                  stats ? "text-2xl" : "text-sm"
+                } font-bold text-gray-800`}
+              >
+                {stats ? stats.guests : "Loading..."}
               </h3>
             </div>
           </div>
@@ -229,8 +237,12 @@ const ActivityMonitorClient = () => {
             </div>
             <div>
               <p className="text-sm text-gray-500 font-medium">Tenants</p>
-              <h3 className="text-2xl font-bold text-gray-800">
-                {stats ? stats.tenants : "0"}
+              <h3
+                className={`${
+                  stats ? "text-2xl" : "text-sm"
+                } font-bold text-gray-800`}
+              >
+                {stats ? stats.tenants : "Loading..."}
               </h3>
             </div>
           </div>
@@ -242,8 +254,12 @@ const ActivityMonitorClient = () => {
             </div>
             <div>
               <p className="text-sm text-gray-500 font-medium">Owners</p>
-              <h3 className="text-2xl font-bold text-gray-800">
-                {stats ? stats.owners : "0"}
+              <h3
+                className={`${
+                  stats ? "text-2xl" : "text-sm"
+                } font-bold text-gray-800`}
+              >
+                {stats ? stats.owners : "Loading..."}
               </h3>
             </div>
           </div>
@@ -253,7 +269,7 @@ const ActivityMonitorClient = () => {
       {/* Filters & Actions */}
       <div className="flex flex-col md:flex-row gap-4 items-center justify-between bg-white p-4 rounded-xl shadow-sm border border-gray-100">
         <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto flex-1">
-          <div className="relative w-full md:w-[250px]">
+          <div className="relative w-full md:w-62.5">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <Search size={18} className="text-gray-400" />
             </div>
@@ -310,7 +326,7 @@ const ActivityMonitorClient = () => {
 
       {/* Data Table */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden overflow-x-auto">
-        <table className="w-full text-left border-collapse min-w-[800px]">
+        <table className="w-full text-left border-collapse min-w-200">
           <thead className="bg-gray-50 border-b border-gray-100 text-gray-500 text-sm">
             <tr>
               <th className="px-4 py-3 font-medium">Visitor</th>
@@ -376,7 +392,7 @@ const ActivityMonitorClient = () => {
                   </td>
                   <td className="px-4 py-3">
                     <div
-                      className="max-w-[150px] truncate text-sm"
+                      className="max-w-37.5 truncate text-sm"
                       title={session.currentPage}
                     >
                       {session.currentPage || "/"}
@@ -390,7 +406,7 @@ const ActivityMonitorClient = () => {
                         <Monitor size={14} />
                       )}
                       <span
-                        className="truncate max-w-[80px]"
+                        className="truncate max-w-20"
                         title={session.device?.browser}
                       >
                         {session.device?.browser || "Unknown"}
@@ -400,7 +416,7 @@ const ActivityMonitorClient = () => {
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-1.5 text-sm text-gray-600">
                       <Globe size={14} />
-                      <span className="truncate max-w-[100px]">
+                      <span className="truncate max-w-25">
                         {session.geo?.city
                           ? `${session.geo.city}, ${session.geo.country}`
                           : "Unknown"}

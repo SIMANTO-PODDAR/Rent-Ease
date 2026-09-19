@@ -1,30 +1,30 @@
-import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Mail, Phone, MapPin } from 'lucide-react';
-import { FaFacebook, FaInstagram, FaSquareXTwitter } from 'react-icons/fa6';
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Mail, Phone, MapPin } from "lucide-react";
+import { FaFacebook, FaInstagram, FaSquareXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   const socialLinks = [
-    { icon: FaFacebook, href: 'https://facebook.com', label: 'Facebook' },
-    { icon: FaSquareXTwitter, href: 'https://twitter.com', label: 'Twitter' },
-    { icon: FaInstagram, href: 'https://instagram.com', label: 'Instagram' },
+    { icon: FaFacebook, href: "https://facebook.com", label: "Facebook" },
+    { icon: FaSquareXTwitter, href: "https://twitter.com", label: "Twitter" },
+    { icon: FaInstagram, href: "https://instagram.com", label: "Instagram" },
   ];
 
   const quickLinks = [
-    { name: 'Browse Properties', href: '/all-properties' },
-    { name: 'How It Works', href: '#' },
-    { name: 'About Us', href: '#' },
-    { name: 'Latest News', href: '#' },
-    { name: 'List a Property', href: '#' },
+    { name: "Browse Properties", href: "/all-properties" },
+    { name: "How It Works", href: "#" },
+    { name: "About Us", href: "#" },
+    { name: "Latest News", href: "#" },
+    { name: "List a Property", href: "/dashboard/owner/add-property" },
   ];
 
   const supportLinks = [
-    { name: 'Help Center', href: '#' },
-    { name: 'Contact Us', href: '#' },
-    { name: 'Privacy Policy', href: '#' },
-    { name: 'Terms of Service', href: '#' },
-    { name: 'FAQs', href: '#' },
+    { name: "Help Center", href: "#" },
+    { name: "Contact Us", href: "/#contact" },
+    { name: "Privacy Policy", href: "/legal/#privacy" },
+    { name: "Terms of Service", href: "/legal/#terms" },
+    { name: "FAQs", href: "#" },
   ];
 
   return (
@@ -40,7 +40,10 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand & Description Column */}
           <div className="space-y-6">
-            <Link href="/" className="inline-block transition-opacity hover:opacity-90">
+            <Link
+              href="/"
+              className="inline-block transition-opacity hover:opacity-90"
+            >
               <Image
                 src="/RentEaseLogo.png"
                 alt="RentEase Logo"
@@ -51,7 +54,9 @@ const Footer = () => {
               />
             </Link>
             <p className="text-sm leading-relaxed text-zinc-400 max-w-xs">
-              RentEase makes finding, viewing, and leasing your next home effortless. Discover premium properties with confidence and flexible rental terms.
+              RentEase makes finding, viewing, and leasing your next home
+              effortless. Discover premium properties with confidence and
+              flexible rental terms.
             </p>
             {/* Social Icons */}
             <div className="flex space-x-3 pt-2">
@@ -122,22 +127,36 @@ const Footer = () => {
               <div className="space-y-3 text-sm">
                 <div className="flex items-start space-x-3 text-zinc-400">
                   <MapPin className="w-4 h-4 mt-0.5 text-zinc-500 shrink-0" />
-                  <span>100 RentEase Plaza, Suite 500, San Francisco, CA 94103</span>
+                  <span>
+                    100 RentEase Plaza, Suite 500, San Francisco, CA 94103
+                  </span>
                 </div>
                 <div className="flex items-center space-x-3 text-zinc-400">
                   <Phone className="w-4 h-4 text-zinc-500 shrink-0" />
-                  <a href="tel:+18005550199" className="hover:text-white transition-colors">+1 (800) 555-0199</a>
+                  <a
+                    href="tel:+18005550199"
+                    className="hover:text-white transition-colors"
+                  >
+                    +1 (800) 555-0199
+                  </a>
                 </div>
                 <div className="flex items-center space-x-3 text-zinc-400">
                   <Mail className="w-4 h-4 text-zinc-500 shrink-0" />
-                  <a href="mailto:info@rentease.com" className="hover:text-white transition-colors">info@rentease.com</a>
+                  <a
+                    href="mailto:info@rentease.com"
+                    className="hover:text-white transition-colors"
+                  >
+                    info@rentease.com
+                  </a>
                 </div>
               </div>
             </div>
 
             {/* Static Newsletter Input */}
             <div className="space-y-2 pt-2">
-              <p className="text-xs text-zinc-500">Subscribe to listings & updates</p>
+              <p className="text-xs text-zinc-500">
+                Subscribe to listings & updates
+              </p>
               <div className="flex items-center relative">
                 <input
                   type="email"
@@ -162,16 +181,26 @@ const Footer = () => {
         {/* Bottom copyright section */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
           <p className="text-zinc-500">
-            &copy; {new Date().getFullYear()} RentEase. All rights reserved. Designed with passion for a better renting experience.
+            &copy; {new Date().getFullYear()} RentEase. All rights reserved.
+            Designed with passion for a better renting experience.
           </p>
           <div className="flex space-x-6">
-            <Link href="/" className="text-zinc-500 hover:text-zinc-300 transition-colors">
+            <Link
+              href="/legal/#privacy"
+              className="text-zinc-500 hover:text-zinc-300 transition-colors"
+            >
               Privacy Policy
             </Link>
-            <Link href="/" className="text-zinc-500 hover:text-zinc-300 transition-colors">
+            <Link
+              href="/legal/#terms"
+              className="text-zinc-500 hover:text-zinc-300 transition-colors"
+            >
               Terms of Service
             </Link>
-            <Link href="/" className="text-zinc-500 hover:text-zinc-300 transition-colors">
+            <Link
+              href="/"
+              className="text-zinc-500 hover:text-zinc-300 transition-colors"
+            >
               Cookie Preferences
             </Link>
           </div>

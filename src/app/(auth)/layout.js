@@ -80,13 +80,13 @@ export default function AuthenticationLayout({ children }) {
               Properties
             </Link>
             <Link
-              href="/"
+              href="/legal/#privacy"
               className="hover:text-[#0a3d62] transition-colors font-medium"
             >
               Privacy Policy
             </Link>
             <Link
-              href="/"
+              href="/legal/#terms"
               className="hover:text-[#0a3d62] transition-colors font-medium"
             >
               Terms of Service

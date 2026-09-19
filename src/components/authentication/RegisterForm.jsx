@@ -83,18 +83,13 @@ const RegisterForm = ({ onSwitchToLogin }) => {
       className="w-full max-w-sm sm:max-w-md mx-auto my-auto"
     >
       <div className="mb-6">
-        <h2 className="text-2xl font-bold text-[#0a3d62]">
-          Create an Account
-        </h2>
+        <h2 className="text-2xl font-bold text-[#0a3d62]">Create an Account</h2>
         <p className="text-xs sm:text-sm text-slate-500 mt-1">
           Fill in your details below to get started with Rent-Ease
         </p>
       </div>
 
-      <Form
-        className="flex flex-col gap-4"
-        onSubmit={handleRegistrationSubmit}
-      >
+      <Form className="flex flex-col gap-4" onSubmit={handleRegistrationSubmit}>
         {/* Name */}
         <TextField isRequired name="name" type="text">
           <Label>Name</Label>
@@ -110,10 +105,7 @@ const RegisterForm = ({ onSwitchToLogin }) => {
           validate={validateEmail}
         >
           <Label>Email</Label>
-          <Input
-            placeholder="Enter your Email"
-            autoComplete="username"
-          />
+          <Input placeholder="Enter your Email" autoComplete="username" />
           <FieldError />
         </TextField>
 
@@ -159,11 +151,34 @@ const RegisterForm = ({ onSwitchToLogin }) => {
             </InputGroup.Suffix>
           </InputGroup>
           <Description>
-            Must be at least 8 characters with 1 uppercase, 1
-            lowercase, and 1 number
+            Must be at least 8 characters with 1 uppercase, 1 lowercase, and 1
+            number
           </Description>
           <FieldError />
         </TextField>
+
+        {/* Accept Legal */}
+        <div className="flex items-start gap-2 text-xs sm:text-sm text-slate-600">
+          <input
+            type="checkbox"
+            name="acceptLegal"
+            className="mt-0.5 size-4 cursor-pointer accent-[#0a3d62]"
+            required
+          />
+
+          <p>
+            I agree to the{" "}
+            <a
+              href="/legal"
+              target="_self"
+              rel="noopener noreferrer"
+              className="font-semibold text-[#0a3d62] underline hover:text-[#3498db]"
+            >
+              Terms and Legal Policies
+            </a>
+            .
+          </p>
+        </div>
 
         {/* Submit Button */}
         <button
@@ -172,9 +187,7 @@ const RegisterForm = ({ onSwitchToLogin }) => {
           className="btn text-[#0a3d62] w-full rounded-2xl hover:text-white hover:bg-linear-to-r from-[#0a3d62] to-[#3498db] mt-2 cursor-pointer transition-all disabled:opacity-50"
         >
           <Check className="size-4" />
-          <span>
-            {isRegistering ? "Registering..." : "Register"}
-          </span>
+          <span>{isRegistering ? "Registering..." : "Register"}</span>
         </button>
 
         <div className="divider my-2 text-xs text-slate-400 font-medium">
