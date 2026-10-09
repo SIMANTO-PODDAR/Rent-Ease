@@ -10,12 +10,12 @@ The role is stored as an additional field on each user in MongoDB via `better-au
 
 ## How Roles Are Assigned
 
-| Mechanism | Details |
-| :--- | :--- |
-| **Default role** | Every newly registered user is automatically assigned `"Tenant"` (`defaultValue: "Tenant"` in `auth.js`) |
-| **Role promotion** | Only the **Admin** can change a user's role (Tenant ↔ Owner) via the User Management dashboard |
+| Mechanism                 | Details                                                                                                             |
+| :------------------------ | :------------------------------------------------------------------------------------------------------------------ |
+| **Default role**          | Every newly registered user is automatically assigned `"Tenant"` (`defaultValue: "Tenant"` in `auth.js`)            |
+| **Role promotion**        | Only the **Admin** can change a user's role (Tenant ↔ Owner) via the User Management dashboard                      |
 | **Admin role protection** | The Admin role cannot be changed through the UI — the role change button is permanently disabled for Admin accounts |
-| **Authentication** | Supports email/password and Google OAuth; JWT session strategy with a 3-day max age |
+| **Authentication**        | Supports email/password and Google OAuth; JWT session strategy with a 3-day max age                                 |
 
 ---
 
@@ -43,39 +43,44 @@ Every dashboard layout (`/dashboard/admin`, `/dashboard/owner`, `/dashboard/tena
 
 ### Dashboard Sidebar Navigation
 
-| Label | Route | Purpose |
-| :--- | :--- | :--- |
-| My Bookings | `/dashboard/tenant/my-bookings` | View all bookings and their payment status |
-| Favorites | `/dashboard/tenant/my-favorites` | View and manage saved favorite properties |
-| Profile | `/dashboard/tenant` | View personal profile information |
+| Label       | Route                            | Purpose                                    |
+| :---------- | :------------------------------- | :----------------------------------------- |
+| My Bookings | `/dashboard/tenant/my-bookings`  | View all bookings and their payment status |
+| Favorites   | `/dashboard/tenant/my-favorites` | View and manage saved favorite properties  |
+| Profile     | `/dashboard/tenant`              | View personal profile information          |
 
 ### What a Tenant Can Do
 
 **Property Discovery**
+
 - Browse all approved properties on the `/all-properties` public listing
 - View individual property detail pages at `/all-properties/[id]`
 - Use advanced search and filtering (available to all visitors)
 
 **Booking**
+
 - Book a property by filling out a booking form (move-in date, contact number, name, email, additional notes), then immediately redirected to Stripe for payment
 - Booking is created with `bookingStatus: "Pending"` and `paymentStatus: "Unpaid"` by default
 - View all their bookings in **My Bookings**, including booking status (Pending / Approved / Rejected) and payment status (Paid / Unpaid)
 
 **Favorites**
+
 - Add any property to Favorites from the property detail page
 - Remove a property from Favorites
 - View the full favorites list in **My Favorites**
 
 **Reviews & Ratings**
+
 - Submit a star rating (1–5) and a written review on any property detail page
 - Reviews are linked to the tenant's identity (name, ID, email)
 
 **Profile**
+
 - View their own profile — name, email, role, email verification status, join date, last updated date
 
 ### Tenant Restrictions
 
-- Cannot book a property unless signed in with role `Tenant` — attempting to book as Owner or Admin shows: *"Please sign in as a tenant to continue."*
+- Cannot book a property unless signed in with role `Tenant` — attempting to book as Owner or Admin shows: _"Please sign in as a tenant to continue."_
 - Cannot add to favorites or submit reviews unless signed in with role `Tenant`
 - Cannot access `/dashboard/owner/*` or `/dashboard/admin/*` routes (redirected to 403)
 - Cannot list, add, or manage properties
@@ -94,21 +99,23 @@ Every dashboard layout (`/dashboard/admin`, `/dashboard/owner`, `/dashboard/tena
 
 ### Dashboard Sidebar Navigation
 
-| Label | Route | Purpose |
-| :--- | :--- | :--- |
-| Analytics | `/dashboard/owner` | Home dashboard with summary stats and earnings chart |
-| Add Property | `/dashboard/owner/add-property` | Submit a new property listing |
-| My Properties | `/dashboard/owner/my-properties` | View, update, and delete own properties |
-| Booking Requests | `/dashboard/owner/booking-requests` | Approve or reject incoming booking requests |
-| Profile | `/dashboard/owner/profile` | View personal profile information |
+| Label            | Route                               | Purpose                                              |
+| :--------------- | :---------------------------------- | :--------------------------------------------------- |
+| Analytics        | `/dashboard/owner`                  | Home dashboard with summary stats and earnings chart |
+| Add Property     | `/dashboard/owner/add-property`     | Submit a new property listing                        |
+| My Properties    | `/dashboard/owner/my-properties`    | View, update, and delete own properties              |
+| Booking Requests | `/dashboard/owner/booking-requests` | Approve or reject incoming booking requests          |
+| Profile          | `/dashboard/owner/profile`          | View personal profile information                    |
 
 ### What an Owner Can Do
 
 **Analytics Dashboard**
+
 - View three summary cards: **Total Properties**, **Total Approved Bookings**, **Total Earnings** (sum of all paid bookings)
 - View a **Monthly Earnings Chart** showing revenue and booking count for the last 12 months
 
 **Property Management**
+
 - **Add a new property** — full form with: title, description, location, property type, rent price, rent type (Monthly / Weekly / Daily), bedrooms, bathrooms, size (sqft), amenities (Parking, Lift, CCTV, Gym, Balcony, etc.), extra features (Furnished, AC, Pet Friendly, Internet Ready, etc.), and a property image (uploaded via ImgBB, max 5MB)
 - Newly submitted properties always start with `status: "Pending"` and require Admin approval before appearing publicly
 - **View all own properties** — table showing property name and current status (Pending / Approved / Rejected)
@@ -117,11 +124,13 @@ Every dashboard layout (`/dashboard/admin`, `/dashboard/owner`, `/dashboard/tena
 - **Delete a property**
 
 **Booking Request Management**
+
 - See all incoming booking requests for their properties, with tenant info (name, email, phone number), property name, booking status, amount, and payment status
 - **Approve a booking** — sets `bookingStatus: "Approved"`
 - **Reject a booking** — sets `bookingStatus: "Rejected"`
 
 **Profile**
+
 - View their own profile — name, email, role, email verification status, join date, last updated date
 
 ### Owner Restrictions
@@ -144,18 +153,19 @@ Every dashboard layout (`/dashboard/admin`, `/dashboard/owner`, `/dashboard/tena
 
 ### Dashboard Sidebar Navigation
 
-| Label | Route | Purpose |
-| :--- | :--- | :--- |
-| Profile | `/dashboard/admin` | View admin profile |
-| All Users | `/dashboard/admin/all-users` | Manage all registered users and their roles |
-| Activity Monitor | `/dashboard/admin/activity-monitor` | Real-time visitor and session tracking |
-| All Properties | `/dashboard/admin/all-properties` | Review, approve, reject, update, and delete any property |
-| All Bookings | `/dashboard/admin/all-bookings` | View all bookings platform-wide |
-| Transactions | `/dashboard/admin/transactions` | View all financial transactions platform-wide |
+| Label            | Route                               | Purpose                                                  |
+| :--------------- | :---------------------------------- | :------------------------------------------------------- |
+| Profile          | `/dashboard/admin`                  | View admin profile                                       |
+| All Users        | `/dashboard/admin/all-users`        | Manage all registered users and their roles              |
+| Activity Monitor | `/dashboard/admin/activity-monitor` | Real-time visitor and session tracking                   |
+| All Properties   | `/dashboard/admin/all-properties`   | Review, approve, reject, update, and delete any property |
+| All Bookings     | `/dashboard/admin/all-bookings`     | View all bookings platform-wide                          |
+| Transactions     | `/dashboard/admin/transactions`     | View all financial transactions platform-wide            |
 
 ### What an Admin Can Do
 
 **User Management** — `/dashboard/admin/all-users`
+
 - View a paginated table of all registered users (name, email, current role)
 - Change a user's role between Tenant and Owner:
   - Tenant → promote to Owner
@@ -163,12 +173,14 @@ Every dashboard layout (`/dashboard/admin`, `/dashboard/owner`, `/dashboard/tena
 - Admin accounts show a disabled button and cannot be modified
 
 **Real-Time Activity Monitor** — `/dashboard/admin/activity-monitor`
+
 - View live stats: active sessions, total visitors, device breakdown, geographic locations, and page navigation
 - Search sessions by user/visitor, filter by role and active/inactive status, paginated (15 sessions per page)
 - Drill into any individual session via a detail drawer
 - Sessions expire after 30 minutes of inactivity
 
 **Property Moderation** — `/dashboard/admin/all-properties`
+
 - View all properties platform-wide, paginated
 - See each property's name and current status (Pending / Approved / Rejected)
 - **Approve a property** — sets `status: "Approved"`, clears rejection feedback, makes the property publicly visible
@@ -178,14 +190,17 @@ Every dashboard layout (`/dashboard/admin`, `/dashboard/owner`, `/dashboard/tena
 - **Delete any property** from the platform
 
 **All Bookings** — `/dashboard/admin/all-bookings`
+
 - View a paginated table of all bookings across the entire platform
 - Columns: property name & price, owner name & email, tenant name & email & contact number, booking status, booking date, payment status
 
 **Transactions** — `/dashboard/admin/transactions`
+
 - View a paginated transaction ledger for all bookings platform-wide
 - Columns: transaction ID, property name, tenant name, owner name, amount paid ($), booking date
 
 **Profile**
+
 - View their own profile — name, email, role, email verification status, join date, last updated date
 
 ### Admin Restrictions & Notes
@@ -198,25 +213,25 @@ Every dashboard layout (`/dashboard/admin`, `/dashboard/owner`, `/dashboard/tena
 
 ## Role Comparison Summary
 
-| Capability | Tenant | Owner | Admin |
-| :--- | :---: | :---: | :---: |
-| Browse public property listings | ✅ | ✅ | ✅ |
-| Book a property (with Stripe payment) | ✅ | ❌ | ❌ |
-| Manage favorites (add / remove) | ✅ | ❌ | ❌ |
-| Submit property reviews & ratings | ✅ | ❌ | ❌ |
-| View own bookings | ✅ | ❌ | ❌ |
-| Add a new property listing | ❌ | ✅ | ❌ |
-| View & manage own properties | ❌ | ✅ | ❌ |
-| Approve / reject incoming bookings | ❌ | ✅ | ❌ |
-| View own earnings & analytics chart | ❌ | ✅ | ❌ |
-| Approve / reject property listings | ❌ | ❌ | ✅ |
-| Write rejection feedback for listings | ❌ | ❌ | ✅ |
-| Update / delete properties | ❌ | Own only | ✅ All |
-| View all platform-wide bookings | ❌ | ❌ | ✅ |
-| View all platform-wide transactions | ❌ | ❌ | ✅ |
-| Manage user roles (Tenant ↔ Owner) | ❌ | ❌ | ✅ |
-| Real-time activity & session monitor | ❌ | ❌ | ✅ |
-| View / update own profile | ✅ | ✅ | ✅ |
+| Capability                            | Tenant |  Owner   | Admin  |
+| :------------------------------------ | :----: | :------: | :----: |
+| Browse public property listings       |   ✅   |    ✅    |   ✅   |
+| Book a property (with Stripe payment) |   ✅   |    ❌    |   ❌   |
+| Manage favorites (add / remove)       |   ✅   |    ❌    |   ❌   |
+| Submit property reviews & ratings     |   ✅   |    ❌    |   ❌   |
+| View own bookings                     |   ✅   |    ❌    |   ❌   |
+| Add a new property listing            |   ❌   |    ✅    |   ❌   |
+| View & manage own properties          |   ❌   |    ✅    |   ❌   |
+| Approve / reject incoming bookings    |   ❌   |    ✅    |   ❌   |
+| View own earnings & analytics chart   |   ❌   |    ✅    |   ❌   |
+| Approve / reject property listings    |   ❌   |    ❌    |   ✅   |
+| Write rejection feedback for listings |   ❌   |    ❌    |   ✅   |
+| Update / delete properties            |   ❌   | Own only | ✅ All |
+| View all platform-wide bookings       |   ❌   |    ❌    |   ✅   |
+| View all platform-wide transactions   |   ❌   |    ❌    |   ✅   |
+| Manage user roles (Tenant ↔ Owner)    |   ❌   |    ❌    |   ✅   |
+| Real-time activity & session monitor  |   ❌   |    ❌    |   ✅   |
+| View / update own profile             |   ✅   |    ✅    |   ✅   |
 
 ---
 
@@ -246,13 +261,13 @@ Booking Created  →  Unpaid  →  Paid  (after successful Stripe checkout)
 
 ## Key Technical Reference
 
-| Topic | Detail |
-| :--- | :--- |
-| Auth library | `better-auth` v1.6.19 with `@better-auth/mongo-adapter` |
-| Session strategy | JWT, 3-day (`3 * 24 * 60 * 60` s) max age, cookie cache enabled |
-| Role field location | Additional field on the `user` document in MongoDB |
-| Default role | `"Tenant"` (set in `src/lib/auth.js`) |
-| Route protection utility | `src/lib/verifyRole.js` — server-side, called in each dashboard layout |
-| API authorization | Bearer JWT token passed in `authorization` header on all protected API calls |
-| Supported auth methods | Email & Password, Google OAuth |
-| Role values (exact strings) | `"Tenant"`, `"Owner"`, `"Admin"` (case-sensitive) |
+| Topic                       | Detail                                                                       |
+| :-------------------------- | :--------------------------------------------------------------------------- |
+| Auth library                | `better-auth` v1.6.19 with `@better-auth/mongo-adapter`                      |
+| Session strategy            | JWT, 3-day (`3 * 24 * 60 * 60` s) max age, cookie cache enabled              |
+| Role field location         | Additional field on the `user` document in MongoDB                           |
+| Default role                | `"Tenant"` (set in `src/lib/auth.js`)                                        |
+| Route protection utility    | `src/lib/verifyRole.js` — server-side, called in each dashboard layout       |
+| API authorization           | Bearer JWT token passed in `authorization` header on all protected API calls |
+| Supported auth methods      | Email & Password, Google OAuth                                               |
+| Role values (exact strings) | `"Tenant"`, `"Owner"`, `"Admin"` (case-sensitive)                            |
