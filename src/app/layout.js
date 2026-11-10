@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "Rent Ease",
-  description: "by Simanto Poddar",
+  description: "Rent-Ease is a modern, comprehensive property rental and booking platform designed to seamlessly connect tenants and property owners. The application provides an intuitive and visually appealing interface allowing users to discover high-quality rental properties, save their favorites for future reference, and book properties entirely online. With secure payment processing built-in, users can safely manage transactions. Rent-Ease also features comprehensive role-based dashboards, giving tenants control over their bookings and favorites, while providing property owners and administrators with powerful tools to manage properties, booking requests, earnings analytics, and user interactions",
 };
 
 export default function RootLayout({ children }) {
